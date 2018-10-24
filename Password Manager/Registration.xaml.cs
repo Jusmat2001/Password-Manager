@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,29 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Configuration;
 
 namespace Password_Manager
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FirstRun.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FirstRun : Window
     {
-        public MainWindow()
+        public FirstRun()
         {
             InitializeComponent();
-            LoginWindow lw = new LoginWindow();
-            this.Hide();
-            lw.Show();
 
-        }
 
-        private void modeSwitchBtn_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

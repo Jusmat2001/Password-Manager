@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CodeOne Password Manager" Height="400" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Background="#FFC0B3E4"  BorderBrush="#FFDDF749" UseLayoutRounding="True">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="172*"/>
+            <ColumnDefinition Width="225*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid HorizontalAlignment="Left" Height="267" Margin="10,95,0,0" VerticalAlignment="Top" Width="774" Grid.ColumnSpan="2"/>
+        <Button x:Name="modeSwitchBtn" Content="Switch Mode" HorizontalAlignment="Left" Height="80" Margin="316.041,10,0,0" VerticalAlignment="Top" Width="124" Grid.Column="1" Click="modeSwitchBtn_Click"/>
+
+
+
+
     </Grid>
 </Window>

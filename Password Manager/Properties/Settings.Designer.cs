@@ -67,5 +67,16 @@ namespace Password_Manager.Properties {
                 return ((bool)(this["Registered"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=3JS0082\\justinsqlexpress;Initial Catalog=master;Integrated Security=T" +
+            "rue")]
+        public string masterConnectionString {
+            get {
+                return ((string)(this["masterConnectionString"]));
+            }
+        }
     }
 }

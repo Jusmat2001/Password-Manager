@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="master" Class="L2SAccessDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=3JS0082\justinsqlexpress;Initial Catalog=master;Integrated Security=True" SettingsObjectName="Password_Manager.Properties.Settings" SettingsPropertyName="masterConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.PMUsers" Member="PMUsers">
+    <Type Name="PMUser">
+      <Column Name="PMUsername" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PMPassword" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateRegistered" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

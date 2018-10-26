@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="L2SAccess">
+  <DataContextMoniker Name="/L2SAccessDataContext" />
+  <nestedChildShapes>
+    <classShape Id="b6a929dc-f15d-460b-9e61-33f133398a29" absoluteBounds="4, 1.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/L2SAccessDataContext/PMUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b2c7f177-52f1-41d2-b657-0679a73a030c" absoluteBounds="4.015, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

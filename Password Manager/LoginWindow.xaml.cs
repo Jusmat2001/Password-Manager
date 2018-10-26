@@ -25,11 +25,7 @@ namespace Password_Manager
         public LoginWindow()
         {
             InitializeComponent();
-            //if (!Properties.Settings.Default.Registered)
-            //{
-            //    FirstRun.Register();
-
-            //}
+           
             InitData();
         }
 
@@ -41,7 +37,7 @@ namespace Password_Manager
                 {
                     lwNameBox.Text = Properties.Settings.Default.UserName;
                     SecureString password = Crypt.DecryptString(Properties.Settings.Default.Password);
-                    lwPassBox.Text = Crypt.ToInsecureString(password);
+                    lwPassBox.Password = Crypt.ToInsecureString(password);
                     remmeCheckbox.IsChecked = true;
                 }
                 else
@@ -56,7 +52,7 @@ namespace Password_Manager
             if ((bool) remmeCheckbox.IsChecked)
             {
                 Properties.Settings.Default.UserName = lwNameBox.Text;
-                SecureString password = Crypt.ToSecureString(lwPassBox.Text);
+                SecureString password = Crypt.ToSecureString(lwPassBox.Password);
                 Properties.Settings.Default.Password = Crypt.EncryptString(password);
                 Properties.Settings.Default.Remme = "yes";
                 Properties.Settings.Default.Save();

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
+using System.Data.Linq;
 
 namespace Password_Manager
 {
@@ -22,13 +23,24 @@ namespace Password_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+        LoginWindow lw = new LoginWindow();
+
         public MainWindow()
         {
             InitializeComponent();
-            LoginWindow lw = new LoginWindow();
-            this.Hide();
-            lw.Show();
-
+            if (!Properties.Settings.Default.Registered)
+            {
+                FirstRun Fr = new FirstRun();
+                this.Hide();
+                Fr.Show();
+            }
+            else
+            {
+                this.Hide();
+                lw.Show();
+            }
+            
         }
 
         private void modeSwitchBtn_Click(object sender, RoutedEventArgs e)

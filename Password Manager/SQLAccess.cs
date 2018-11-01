@@ -2,29 +2,63 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Linq;
+using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Password_Manager
 {
-    public class SQLAccess
+    public static class SQLAccess
     {
-        private string sQuery = "";
-        public static DataContext db = new DataContext(SQLAccess.ConnVal("C1user"));
-
+        
         public static string ConnVal(string name)
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
-        public void AddNewUser(string susername, string spass, DateTime dtregDate)
+        public static void AddUser(string susername, string spass)
         {
-            var onuser = new UserObj();
-            onuser.PMUsername = susername;
-            onuser.PMPassword = spass;
-            onuser.DateRegistered = dtregDate;
-            //db.insert a new user
+            using (L2SAccessDataContext db = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                PMUser nUser = new PMUser();
+                nUser.DateRegistered = DateTime.Now;
+                nUser.PMUsername = susername;
+                nUser.PMPassword = spass;
+
+                db.PMUsers.InsertOnSubmit(nUser);
+
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    throw;
+                }
+            }
+        }
+
+        public static bool LoginCheck(string sUser, string sPass)
+        {
+            using (L2SAccessDataContext db = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                var q = from p in db.PMUsers
+                    where p.PMUsername == sUser
+                    && p.PMPassword == sPass
+                    select p;
+
+                if (q.Any())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
     }

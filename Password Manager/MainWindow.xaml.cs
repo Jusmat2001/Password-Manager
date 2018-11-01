@@ -24,23 +24,15 @@ namespace Password_Manager
     public partial class MainWindow : Window
     {
         
-        LoginWindow lw = new LoginWindow();
+        
 
         public MainWindow()
         {
             InitializeComponent();
-            if (!Properties.Settings.Default.Registered)
-            {
-                FirstRun Fr = new FirstRun();
-                this.Hide();
-                Fr.Show();
-            }
-            else
-            {
-                this.Hide();
-                lw.Show();
-            }
-            
+            this.Hide();
+            LoginWindow lw = new LoginWindow(this);
+            lw.Show();
+
         }
 
         private void modeSwitchBtn_Click(object sender, RoutedEventArgs e)

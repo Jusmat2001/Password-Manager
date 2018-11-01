@@ -8,5 +8,11 @@
         <elementListCompartment Id="b2c7f177-52f1-41d2-b657-0679a73a030c" absoluteBounds="4.015, 1.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="43f2e04a-a8c8-4f56-b6e2-cdd431a2a6bc" absoluteBounds="6.375, 1.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/L2SAccessDataContext/PMSite" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ff9885c6-2ef0-4f2c-b682-e47cdac9a371" absoluteBounds="6.39, 1.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

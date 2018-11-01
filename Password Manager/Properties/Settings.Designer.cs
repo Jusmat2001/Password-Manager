@@ -59,12 +59,15 @@ namespace Password_Manager.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Registered {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FirstRun {
             get {
-                return ((bool)(this["Registered"]));
+                return ((bool)(this["FirstRun"]));
+            }
+            set {
+                this["FirstRun"] = value;
             }
         }
         

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,14 +25,18 @@ namespace Password_Manager
     public partial class FirstRun : Window
     {
         private string sfirstname, slastname, susername, spass;
-        private DateTime dtregDate;
-
+        private LoginWindow l_parent;
 
         public FirstRun()
         {
+        }
+
+        public FirstRun(LoginWindow parent):this()
+        {
+            l_parent = parent;
             InitializeComponent();
 
-
+            l_parent.Visibility = Visibility.Collapsed;
         }
 
         private void doneBtn_Click(object sender, RoutedEventArgs e)
@@ -40,49 +46,35 @@ namespace Password_Manager
                 if (fNameBox.Text == string.Empty || lNameBox.Text == string.Empty || passBox.Password == string.Empty)
                 {
                     MessageBox.Show("Please fill out all fields to continue.");
-                    
+                    return;
                 }
                 if (fNameBox.Text != string.Empty && lNameBox.Text != string.Empty && passBox.Password != string.Empty)
                 {
-                    dtregDate = DateTime.Now;
                     sfirstname = fNameBox.Text.ToLower();
                     slastname = lNameBox.Text.ToLower();
                     spass = passBox.Password.ToLower();
                     susername = sfirstname[0] + slastname;
-                    if (DupCheck(susername))
-                    {
-                        MessageBox.Show("Duplicate user. See Justin in IT.");
-                        Environment.Exit(0);
-                    }
+                    
+                    SQLAccess.AddUser(susername, spass);
+                    MessageBox.Show("Your username is : " + susername + "\nAnd your password is : " + spass + "\nPlease log in.");
                     
                 }
-                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                throw;
+                MessageBox.Show("Duplicate User Registered. Please email Justin in IT.\n"+ex.Message);
+                return;
+                
             }
+            
+            this.Close();
+            l_parent.Show();
         }
 
-        public bool DupCheck(string susername)
-        {
-            string sQuery = "SELECT @susername FROM [dbo].[PMUsers];";
-            using (SqlConnection connection = new SqlConnection(SQLAccess.ConnVal("C1user")))
-            {
-                var command = new SqlCommand(sQuery, connection);
-                command.Parameters.AddWithValue("@susername", susername);
-                connection.Open();
-                string result = (string) command.ExecuteScalar();
-                if (result == null)
-                {
-                    return false;
-                }
-                else 
-                {
-                    return true;
-                }
-            }
-        }
+        
+
+       
     }
 }
+    
+

@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
-        Title="Password Manager Login" Height="150" Width="200" Foreground="Black" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+        Title="Password Manager Login" Height="150" Width="200" Foreground="Black" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Loaded="Window_Loaded">
     
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" RenderTransformOrigin="0.425,-0.985"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
-        <TextBox x:Name="lwNameBox" HorizontalAlignment="Left" Height="23" Margin="65,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="65,60,0,0" VerticalAlignment="Top" Width="75" />
+        <TextBox x:Name="lwNameBox" TabIndex="0" HorizontalAlignment="Left" Height="23" Margin="65,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="okBtn" TabIndex="2" Content="OK" HorizontalAlignment="Left" Margin="65,60,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" />
         <CheckBox x:Name="remmeCheckbox" Content="Remember login info" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Height="22" Margin="145,60,0,0" VerticalAlignment="Top" Width="40" FontSize="10"/>
-        <PasswordBox x:Name="lwPassBox" HorizontalAlignment="Left" Height="23" Margin="65,32,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Height="22" Margin="145,60,0,0" VerticalAlignment="Top" Width="40" FontSize="10" Click="cancelBtn_Click"/>
+        <PasswordBox x:Name="lwPassBox" TabIndex="1"  HorizontalAlignment="Left" Height="23" Margin="65,32,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

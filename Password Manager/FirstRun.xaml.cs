@@ -26,6 +26,15 @@ namespace Password_Manager
     {
         private string sfirstname, slastname, susername, spass;
         private LoginWindow l_parent;
+        private bool safeclose = false;
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (!safeclose)
+            {
+                Application.Current.Shutdown();
+            }
+        }
 
         public FirstRun()
         {
@@ -57,23 +66,19 @@ namespace Password_Manager
                     
                     SQLAccess.AddUser(susername, spass);
                     MessageBox.Show("Your username is : " + susername + "\nAnd your password is : " + spass + "\nPlease log in.");
-                    
+                    Properties.Settings.Default.FirstRun = false;
+                    Properties.Settings.Default.Save();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Duplicate User Registered. Please email Justin in IT.\n"+ex.Message);
+                MessageBox.Show("Duplicate User Registered. Please email Justin in IT.\n\n"+ex.Message);
                 return;
-                
             }
-            
+            safeclose = true;
             this.Close();
             l_parent.Show();
         }
-
-        
-
-       
     }
 }
     

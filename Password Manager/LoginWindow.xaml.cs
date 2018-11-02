@@ -102,8 +102,7 @@ namespace Password_Manager
         {
             if (Properties.Settings.Default.FirstRun)
             {
-                Properties.Settings.Default.FirstRun = false;
-                Properties.Settings.Default.Save();
+                
                 this.Hide();
                 FirstRun fr = new FirstRun(this);
                 fr.Show();

@@ -65,7 +65,7 @@ namespace Password_Manager
                     susername = sfirstname[0] + slastname;
                     
                     SQLAccess.AddUser(susername, spass);
-                    MessageBox.Show("Your username is : " + susername + "\nAnd your password is : " + spass + "\nPlease log in.");
+                    MessageBox.Show("Your username is : " + susername + "\nAnd your password is : " + spass + "\n\nPlease log in.");
                     Properties.Settings.Default.FirstRun = false;
                     Properties.Settings.Default.Save();
                 }

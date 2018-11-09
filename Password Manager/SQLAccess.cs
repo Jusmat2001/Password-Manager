@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,18 +21,18 @@ namespace Password_Manager
 
         public static void AddUser(string susername, string spass)
         {
-            using (L2SAccessDataContext db = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
             {
                 PMUser nUser = new PMUser();
                 nUser.DateRegistered = DateTime.Now;
                 nUser.PMUsername = susername;
                 nUser.PMPassword = spass;
 
-                db.PMUsers.InsertOnSubmit(nUser);
+                dc.PMUsers.InsertOnSubmit(nUser);
 
                 try
                 {
-                    db.SubmitChanges();
+                    dc.SubmitChanges();
                 }
                 catch (Exception e)
                 {
@@ -43,23 +44,47 @@ namespace Password_Manager
 
         public static bool LoginCheck(string sUser, string sPass)
         {
-            using (L2SAccessDataContext db = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
             {
-                var q = from p in db.PMUsers
+                var q = from p in dc.PMUsers
                     where p.PMUsername == sUser
                     && p.PMPassword == sPass
                     select p;
+                
 
                 if (q.Any())
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
+        public static bool IsSuperCheck(string sUser)
+        {
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                var q = from p in dc.PMUsers
+                    where p.PMUsername == sUser
+                    && p.CanEditCompany == true
+                    select p;
+                if (q.Any())
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        //public static void LoadDataTable(string sMode)
+        //{
+        //    using (L2SAccessDataContext db = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+        //    {
+        //        var selectQuery =
+        //            from a in db.GetTable<PMCompanySite>()
+        //            select a;
+        //        MainWindow.dataGrid.DataContext = selectQuery;
+        //    }
+        //}
     }
 }

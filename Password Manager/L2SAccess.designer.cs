@@ -33,9 +33,6 @@ namespace Password_Manager
     partial void InsertPMUser(PMUser instance);
     partial void UpdatePMUser(PMUser instance);
     partial void DeletePMUser(PMUser instance);
-    partial void InsertPMSite(PMSite instance);
-    partial void UpdatePMSite(PMSite instance);
-    partial void DeletePMSite(PMSite instance);
     #endregion
 		
 		public L2SAccessDataContext() : 
@@ -68,6 +65,14 @@ namespace Password_Manager
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<PMCompanySite> PMCompanySites
+		{
+			get
+			{
+				return this.GetTable<PMCompanySite>();
+			}
+		}
+		
 		public System.Data.Linq.Table<PMUser> PMUsers
 		{
 			get
@@ -76,11 +81,146 @@ namespace Password_Manager
 			}
 		}
 		
-		public System.Data.Linq.Table<PMSite> PMSites
+		public System.Data.Linq.Table<PMUserSite> PMUserSites
 		{
 			get
 			{
-				return this.GetTable<PMSite>();
+				return this.GetTable<PMUserSite>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PMCompanySites")]
+	public partial class PMCompanySite
+	{
+		
+		private string _siteName;
+		
+		private string _siteUrl;
+		
+		private string _siteId;
+		
+		private string _sitePass;
+		
+		private System.DateTime _lastChanged;
+		
+		private System.Nullable<int> _practice;
+		
+		private string _notes;
+		
+		public PMCompanySite()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string siteName
+		{
+			get
+			{
+				return this._siteName;
+			}
+			set
+			{
+				if ((this._siteName != value))
+				{
+					this._siteName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteUrl", DbType="NVarChar(MAX)")]
+		public string siteUrl
+		{
+			get
+			{
+				return this._siteUrl;
+			}
+			set
+			{
+				if ((this._siteUrl != value))
+				{
+					this._siteUrl = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteId", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string siteId
+		{
+			get
+			{
+				return this._siteId;
+			}
+			set
+			{
+				if ((this._siteId != value))
+				{
+					this._siteId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sitePass", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string sitePass
+		{
+			get
+			{
+				return this._sitePass;
+			}
+			set
+			{
+				if ((this._sitePass != value))
+				{
+					this._sitePass = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChanged", DbType="DateTime NOT NULL")]
+		public System.DateTime lastChanged
+		{
+			get
+			{
+				return this._lastChanged;
+			}
+			set
+			{
+				if ((this._lastChanged != value))
+				{
+					this._lastChanged = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_practice", DbType="Int")]
+		public System.Nullable<int> practice
+		{
+			get
+			{
+				return this._practice;
+			}
+			set
+			{
+				if ((this._practice != value))
+				{
+					this._practice = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
+		public string notes
+		{
+			get
+			{
+				return this._notes;
+			}
+			set
+			{
+				if ((this._notes != value))
+				{
+					this._notes = value;
+				}
 			}
 		}
 	}
@@ -97,6 +237,8 @@ namespace Password_Manager
 		
 		private System.DateTime _DateRegistered;
 		
+		private System.Nullable<bool> _CanEditCompany;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -107,6 +249,8 @@ namespace Password_Manager
     partial void OnPMPasswordChanged();
     partial void OnDateRegisteredChanging(System.DateTime value);
     partial void OnDateRegisteredChanged();
+    partial void OnCanEditCompanyChanging(System.Nullable<bool> value);
+    partial void OnCanEditCompanyChanged();
     #endregion
 		
 		public PMUser()
@@ -174,6 +318,26 @@ namespace Password_Manager
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanEditCompany", DbType="Bit")]
+		public System.Nullable<bool> CanEditCompany
+		{
+			get
+			{
+				return this._CanEditCompany;
+			}
+			set
+			{
+				if ((this._CanEditCompany != value))
+				{
+					this.OnCanEditCompanyChanging(value);
+					this.SendPropertyChanging();
+					this._CanEditCompany = value;
+					this.SendPropertyChanged("CanEditCompany");
+					this.OnCanEditCompanyChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -195,11 +359,9 @@ namespace Password_Manager
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PMSites")]
-	public partial class PMSite : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PMUserSites")]
+	public partial class PMUserSite
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _siteName;
 		
@@ -209,30 +371,15 @@ namespace Password_Manager
 		
 		private string _sitePass;
 		
-		private System.DateTime _lastChanged;
+		private System.Nullable<int> _practice;
 		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnsiteNameChanging(string value);
-    partial void OnsiteNameChanged();
-    partial void OnsiteUrlChanging(string value);
-    partial void OnsiteUrlChanged();
-    partial void OnsiteIdChanging(string value);
-    partial void OnsiteIdChanged();
-    partial void OnsitePassChanging(string value);
-    partial void OnsitePassChanged();
-    partial void OnlastChangedChanging(System.DateTime value);
-    partial void OnlastChangedChanged();
-    #endregion
+		private string _notes;
 		
-		public PMSite()
+		public PMUserSite()
 		{
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string siteName
 		{
 			get
@@ -243,16 +390,12 @@ namespace Password_Manager
 			{
 				if ((this._siteName != value))
 				{
-					this.OnsiteNameChanging(value);
-					this.SendPropertyChanging();
 					this._siteName = value;
-					this.SendPropertyChanged("siteName");
-					this.OnsiteNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteUrl", DbType="NVarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteUrl", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string siteUrl
 		{
 			get
@@ -263,11 +406,7 @@ namespace Password_Manager
 			{
 				if ((this._siteUrl != value))
 				{
-					this.OnsiteUrlChanging(value);
-					this.SendPropertyChanging();
 					this._siteUrl = value;
-					this.SendPropertyChanged("siteUrl");
-					this.OnsiteUrlChanged();
 				}
 			}
 		}
@@ -283,11 +422,7 @@ namespace Password_Manager
 			{
 				if ((this._siteId != value))
 				{
-					this.OnsiteIdChanging(value);
-					this.SendPropertyChanging();
 					this._siteId = value;
-					this.SendPropertyChanged("siteId");
-					this.OnsiteIdChanged();
 				}
 			}
 		}
@@ -303,52 +438,40 @@ namespace Password_Manager
 			{
 				if ((this._sitePass != value))
 				{
-					this.OnsitePassChanging(value);
-					this.SendPropertyChanging();
 					this._sitePass = value;
-					this.SendPropertyChanged("sitePass");
-					this.OnsitePassChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChanged", DbType="DateTime NOT NULL")]
-		public System.DateTime lastChanged
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_practice", DbType="Int")]
+		public System.Nullable<int> practice
 		{
 			get
 			{
-				return this._lastChanged;
+				return this._practice;
 			}
 			set
 			{
-				if ((this._lastChanged != value))
+				if ((this._practice != value))
 				{
-					this.OnlastChangedChanging(value);
-					this.SendPropertyChanging();
-					this._lastChanged = value;
-					this.SendPropertyChanged("lastChanged");
-					this.OnlastChangedChanged();
+					this._practice = value;
 				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
+		public string notes
 		{
-			if ((this.PropertyChanging != null))
+			get
 			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
+				return this._notes;
 			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
+			set
 			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				if ((this._notes != value))
+				{
+					this._notes = value;
+				}
 			}
 		}
 	}

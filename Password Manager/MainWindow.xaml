@@ -5,26 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
-        Title="CodeOne Password Manager" Height="400" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"  BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}" UseLayoutRounding="True">
+        Title="CodeOne Password Manager" Height="400" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"  BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}" UseLayoutRounding="True" Loaded="Window_Loaded" >
     <Grid>
         <DockPanel Margin="0,0,-0.4,340">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Edit" >
-                    <MenuItem Header="Add"/>
+                    <MenuItem Header="Add "/>
                 </MenuItem>
-                    <MenuItem Header="_Placeholder"/>
-
+                <MenuItem Header="_Placeholder"/>
             </Menu>
-
-
         </DockPanel>
-        <DataGrid HorizontalAlignment="Left" Height="267" Margin="10,95,0,0" VerticalAlignment="Top" Width="774" Grid.ColumnSpan="2"/>
+        <DataGrid x:Name="dataGrid"  AlternatingRowBackground="LightYellow" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="267" Margin="10,95,0,0" VerticalAlignment="Top" Width="774" Grid.ColumnSpan="2">
+
+        </DataGrid>
         <Button x:Name="modeSwitchBtn" Content="Switch Mode" HorizontalAlignment="Left" Height="53" Margin="660,37,0,0" VerticalAlignment="Top" Width="124" Click="modeSwitchBtn_Click" FontSize="16" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Height="24" Margin="480,66,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175" FontWeight="Bold" TextDecorations="Underline" FontSize="14"/>
-        <TextBlock HorizontalAlignment="Left" Height="24" Margin="480,37,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175" FontSize="14" TextDecorations="Underline" FontWeight="Bold"/>
-
-
-
+        <TextBlock x:Name="userDecBlock" HorizontalAlignment="Left" Height="24" Margin="529,66,0,0" TextWrapping="Wrap" Text="{Binding User}" VerticalAlignment="Top" Width="126" FontWeight="Bold" TextDecorations="Underline" FontSize="14" Foreground="#FFA51616"/>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="435,66,0,0" TextWrapping="Wrap" Text="Current User:" VerticalAlignment="Top" Width="89" FontSize="14" TextDecorations="Underline" FontWeight="Bold"/>
 
     </Grid>
 </Window>

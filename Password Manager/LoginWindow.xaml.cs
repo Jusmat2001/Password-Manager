@@ -88,8 +88,11 @@ namespace Password_Manager
             if (SQLAccess.LoginCheck(sUser, sPass))
             {
                 SaveData();
+                MainWindow.sUsername = sUser;
+                
                 this.Close();
                 m_parent.Show();
+                
             }
             else
             {
@@ -108,5 +111,7 @@ namespace Password_Manager
                 fr.Show();
             }
         }
+
+        
     }
 }

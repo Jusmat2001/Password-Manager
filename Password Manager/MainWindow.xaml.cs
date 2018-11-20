@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
 using System.Data.Linq;
+using System.Data.SqlClient;
 using System.Drawing;
 
 namespace Password_Manager
@@ -67,24 +68,20 @@ namespace Password_Manager
 
         public void LoadDataGrid(string sMode)
         {
-            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
-            {
 
-                if (sMode == "user")
-                {
-                    var selectQuery =
-                        from a in dc.GetTable<PMUserSite>()
-                        select a;
-                    dataGrid.DataContext = selectQuery;
-                }
-                else if (sMode == "company")
-                {
-                    var selectQuery =
-                        from a in dc.GetTable<PMCompanySite>()
-                        select a;
-                    dataGrid.DataContext = selectQuery;
-                }
-            }
+            //using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            //{
+            //    string selectQuery = "";
+            //    if (sMode == "user")
+            //    {
+            //        selectQuery = "SELECT * FROM dbo.PMUserSites";
+            //    }
+            //    else if (sMode == "company")
+            //    {
+            //        selectQuery = "SELECT * FROM dbo.PMCompanySites";
+            //    }
+            //    SqlDataAdapter sda = new SqlDataAdapter(selectQuery);
+            //}
         }
             
     }

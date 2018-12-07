@@ -21,12 +21,21 @@
   </Table>
   <Table Name="dbo.PMUserSites" Member="PMUserSites">
     <Type Name="PMUserSite">
+      <Column Name="userName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="siteName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="siteUrl" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="siteId" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="sitePass" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="practice" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Practice Table]" Member="Practice_Tables">
+    <Type Name="Practice_Table">
+      <Column Name="PracticeID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PracticeNPI" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PracticeTaxID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PracticeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

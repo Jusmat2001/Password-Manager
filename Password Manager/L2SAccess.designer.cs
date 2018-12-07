@@ -33,6 +33,9 @@ namespace Password_Manager
     partial void InsertPMUser(PMUser instance);
     partial void UpdatePMUser(PMUser instance);
     partial void DeletePMUser(PMUser instance);
+    partial void InsertPractice_Table(Practice_Table instance);
+    partial void UpdatePractice_Table(Practice_Table instance);
+    partial void DeletePractice_Table(Practice_Table instance);
     #endregion
 		
 		public L2SAccessDataContext() : 
@@ -86,6 +89,14 @@ namespace Password_Manager
 			get
 			{
 				return this.GetTable<PMUserSite>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Practice_Table> Practice_Tables
+		{
+			get
+			{
+				return this.GetTable<Practice_Table>();
 			}
 		}
 	}
@@ -363,6 +374,8 @@ namespace Password_Manager
 	public partial class PMUserSite
 	{
 		
+		private string _userName;
+		
 		private string _siteName;
 		
 		private string _siteUrl;
@@ -377,6 +390,22 @@ namespace Password_Manager
 		
 		public PMUserSite()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string userName
+		{
+			get
+			{
+				return this._userName;
+			}
+			set
+			{
+				if ((this._userName != value))
+				{
+					this._userName = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
@@ -472,6 +501,140 @@ namespace Password_Manager
 				{
 					this._notes = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Practice Table]")]
+	public partial class Practice_Table : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PracticeID;
+		
+		private int _PracticeNPI;
+		
+		private int _PracticeTaxID;
+		
+		private string _PracticeName;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPracticeIDChanging(int value);
+    partial void OnPracticeIDChanged();
+    partial void OnPracticeNPIChanging(int value);
+    partial void OnPracticeNPIChanged();
+    partial void OnPracticeTaxIDChanging(int value);
+    partial void OnPracticeTaxIDChanged();
+    partial void OnPracticeNameChanging(string value);
+    partial void OnPracticeNameChanged();
+    #endregion
+		
+		public Practice_Table()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PracticeID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int PracticeID
+		{
+			get
+			{
+				return this._PracticeID;
+			}
+			set
+			{
+				if ((this._PracticeID != value))
+				{
+					this.OnPracticeIDChanging(value);
+					this.SendPropertyChanging();
+					this._PracticeID = value;
+					this.SendPropertyChanged("PracticeID");
+					this.OnPracticeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PracticeNPI", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int PracticeNPI
+		{
+			get
+			{
+				return this._PracticeNPI;
+			}
+			set
+			{
+				if ((this._PracticeNPI != value))
+				{
+					this.OnPracticeNPIChanging(value);
+					this.SendPropertyChanging();
+					this._PracticeNPI = value;
+					this.SendPropertyChanged("PracticeNPI");
+					this.OnPracticeNPIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PracticeTaxID", DbType="Int NOT NULL")]
+		public int PracticeTaxID
+		{
+			get
+			{
+				return this._PracticeTaxID;
+			}
+			set
+			{
+				if ((this._PracticeTaxID != value))
+				{
+					this.OnPracticeTaxIDChanging(value);
+					this.SendPropertyChanging();
+					this._PracticeTaxID = value;
+					this.SendPropertyChanged("PracticeTaxID");
+					this.OnPracticeTaxIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PracticeName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PracticeName
+		{
+			get
+			{
+				return this._PracticeName;
+			}
+			set
+			{
+				if ((this._PracticeName != value))
+				{
+					this.OnPracticeNameChanging(value);
+					this.SendPropertyChanging();
+					this._PracticeName = value;
+					this.SendPropertyChanged("PracticeName");
+					this.OnPracticeNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

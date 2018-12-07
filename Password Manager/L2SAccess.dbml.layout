@@ -14,10 +14,16 @@
         <elementListCompartment Id="14993fbd-f035-4793-8f43-60f579c183d6" absoluteBounds="2.765, 1.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6cc2555a-d6f3-4652-9a07-355975b66782" absoluteBounds="5, 3.875, 2, 1.9631982421875">
+    <classShape Id="6efc76ec-7c13-4462-847b-3906b60d7fa5" absoluteBounds="5, 3.875, 2, 2.1554996744791666">
       <DataClassMoniker Name="/L2SAccessDataContext/PMUserSite" />
       <nestedChildShapes>
-        <elementListCompartment Id="164b5fea-832c-46e6-b0d2-cfdfc13d70ab" absoluteBounds="5.015, 4.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="33069d1c-ef27-4f0e-a5e4-2bda1485c2be" absoluteBounds="5.015, 4.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a23721b5-7729-4cb0-bd1a-076c718ac7b2" absoluteBounds="2.75, 3.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/L2SAccessDataContext/Practice_Table" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9b86d0e9-5b67-4fe9-a218-521002ff4c12" absoluteBounds="2.765, 3.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

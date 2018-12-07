@@ -17,6 +17,8 @@ using System.Configuration;
 using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Deployment.Application;
+
 
 namespace Password_Manager
 {
@@ -28,6 +30,7 @@ namespace Password_Manager
         public string sMode = "user";
         public static string sUsername = "TBD";
         public static bool bIsSuper = false;
+        public static bool bWasCompanyMode = false;
 
         cUser cU = new cUser() { User = sUsername };
 
@@ -47,7 +50,8 @@ namespace Password_Manager
                 sMode = "company";
                 modeSwitchBtn.Content = "CodeOne";
                 modeSwitchBtn.Background = Brushes.DarkRed;
-                LoadDataGrid(sMode);
+                bWasCompanyMode = true;
+                InitComboBox(sMode);
                 //bool check for IsSuper to enable password editing
             }
             else if (sMode == "company")
@@ -55,7 +59,7 @@ namespace Password_Manager
                 sMode = "user";
                 modeSwitchBtn.Content = "User";
                 modeSwitchBtn.Background = Brushes.SteelBlue;
-                LoadDataGrid(sMode);
+                InitComboBox(sMode);
             }
         }
 
@@ -63,33 +67,93 @@ namespace Password_Manager
         {
             cU.User = sUsername;
             userDecBlock.DataContext = cU;
-            LoadDataGrid(sMode);
+            InitComboBox(sMode);
         }
 
-        public void LoadDataGrid(string sMode)
+        public void InitComboBox(string sMode)
         {
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                try
+                {
+                    if (sMode == "user")
+                    {
+                        var query = from s in dc.PMUserSites
+                                    where s.userName == sUsername
+                                    select s.siteName.AsEnumerable();
+                        siteNameBox.ItemsSource = query;
 
-            //using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
-            //{
-            //    string selectQuery = "";
-            //    if (sMode == "user")
-            //    {
-            //        selectQuery = "SELECT * FROM dbo.PMUserSites";
-            //    }
-            //    else if (sMode == "company")
-            //    {
-            //        selectQuery = "SELECT * FROM dbo.PMCompanySites";
-            //    }
-            //    SqlDataAdapter sda = new SqlDataAdapter(selectQuery);
-            //}
+                    }
+                    else if (sMode == "company")
+                    {
+                        var query = from s in dc.PMCompanySites
+                                    select s.siteName.AsEnumerable();
+                        siteNameBox.ItemsSource = query;
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    MessageBox.Show(e.Message);
+                }
+               
+
+                
+               
+            }
         }
-            
-    }
 
-        //public Visibility ShowButton
-        //{
-        //    get { return (OtherProperty ? Visibility.Collapsed : Visibility.Visible); }
-        //}
-        //<Button Visible = "{Binding Path=ShowButton}" />
-    
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (bWasCompanyMode)
+            {
+                string msg = "Please remember to update any company wide login info that may have changed. Exit program?";
+                MessageBoxResult result = MessageBox.Show(msg, "Update Reminder", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+        #region Copy buttons
+        private void IdCopyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(IdTextBox.Text);
+        }
+
+        private void PassCopyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(PassTextBox.Text);
+        }
+        #endregion
+        #region Version display
+        public Version AssemblyVersion
+        {
+            get
+            {
+                return ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            }
+        }
+
+        private void VersionMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBox.Show("Version: " + AssemblyVersion.Major + "." + AssemblyVersion.Minor + "." + AssemblyVersion.Build + "." + AssemblyVersion.Revision);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
+        }
+
+        private void AddASiteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AddWindow aw = new AddWindow();
+            aw.Show();
+        }
+    }
+#endregion     
+
 }

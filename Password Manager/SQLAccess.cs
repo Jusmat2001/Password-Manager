@@ -76,15 +76,6 @@ namespace Password_Manager
             }
         }
 
-        //public static void LoadDataTable(string sMode)
-        //{
-        //    using (L2SAccessDataContext db = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
-        //    {
-        //        var selectQuery =
-        //            from a in db.GetTable<PMCompanySite>()
-        //            select a;
-        //        MainWindow.dataGrid.DataContext = selectQuery;
-        //    }
-        //}
+        
     }
 }

@@ -8,5 +8,21 @@ namespace Password_Manager
         
     }
 
+    public partial class PMUserSite
+    {
+        public PMUserSite (string siteName)
+        {
+            
+        }
+
+        public void LoadPMUserSite(PMUserSite obj)
+        {
+            siteId = obj.siteId;
+            sitePass = obj.sitePass;
+            notes = obj.notes;
+            siteUrl = obj.siteUrl;
+
+        }
+    }
 
 }

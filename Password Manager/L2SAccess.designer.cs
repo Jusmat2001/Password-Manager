@@ -36,6 +36,12 @@ namespace Password_Manager
     partial void InsertPractice_Table(Practice_Table instance);
     partial void UpdatePractice_Table(Practice_Table instance);
     partial void DeletePractice_Table(Practice_Table instance);
+    partial void InsertPMUserSite(PMUserSite instance);
+    partial void UpdatePMUserSite(PMUserSite instance);
+    partial void DeletePMUserSite(PMUserSite instance);
+    partial void InsertPMCompanySite(PMCompanySite instance);
+    partial void UpdatePMCompanySite(PMCompanySite instance);
+    partial void DeletePMCompanySite(PMCompanySite instance);
     #endregion
 		
 		public L2SAccessDataContext() : 
@@ -68,19 +74,19 @@ namespace Password_Manager
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<PMCompanySite> PMCompanySites
-		{
-			get
-			{
-				return this.GetTable<PMCompanySite>();
-			}
-		}
-		
 		public System.Data.Linq.Table<PMUser> PMUsers
 		{
 			get
 			{
 				return this.GetTable<PMUser>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Practice_Table> Practice_Tables
+		{
+			get
+			{
+				return this.GetTable<Practice_Table>();
 			}
 		}
 		
@@ -92,146 +98,11 @@ namespace Password_Manager
 			}
 		}
 		
-		public System.Data.Linq.Table<Practice_Table> Practice_Tables
+		public System.Data.Linq.Table<PMCompanySite> PMCompanySites
 		{
 			get
 			{
-				return this.GetTable<Practice_Table>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PMCompanySites")]
-	public partial class PMCompanySite
-	{
-		
-		private string _siteName;
-		
-		private string _siteUrl;
-		
-		private string _siteId;
-		
-		private string _sitePass;
-		
-		private System.DateTime _lastChanged;
-		
-		private System.Nullable<int> _practice;
-		
-		private string _notes;
-		
-		public PMCompanySite()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string siteName
-		{
-			get
-			{
-				return this._siteName;
-			}
-			set
-			{
-				if ((this._siteName != value))
-				{
-					this._siteName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteUrl", DbType="NVarChar(MAX)")]
-		public string siteUrl
-		{
-			get
-			{
-				return this._siteUrl;
-			}
-			set
-			{
-				if ((this._siteUrl != value))
-				{
-					this._siteUrl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteId", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string siteId
-		{
-			get
-			{
-				return this._siteId;
-			}
-			set
-			{
-				if ((this._siteId != value))
-				{
-					this._siteId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sitePass", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string sitePass
-		{
-			get
-			{
-				return this._sitePass;
-			}
-			set
-			{
-				if ((this._sitePass != value))
-				{
-					this._sitePass = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChanged", DbType="DateTime NOT NULL")]
-		public System.DateTime lastChanged
-		{
-			get
-			{
-				return this._lastChanged;
-			}
-			set
-			{
-				if ((this._lastChanged != value))
-				{
-					this._lastChanged = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_practice", DbType="Int")]
-		public System.Nullable<int> practice
-		{
-			get
-			{
-				return this._practice;
-			}
-			set
-			{
-				if ((this._practice != value))
-				{
-					this._practice = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
-		public string notes
-		{
-			get
-			{
-				return this._notes;
-			}
-			set
-			{
-				if ((this._notes != value))
-				{
-					this._notes = value;
-				}
+				return this.GetTable<PMCompanySite>();
 			}
 		}
 	}
@@ -370,141 +241,6 @@ namespace Password_Manager
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PMUserSites")]
-	public partial class PMUserSite
-	{
-		
-		private string _userName;
-		
-		private string _siteName;
-		
-		private string _siteUrl;
-		
-		private string _siteId;
-		
-		private string _sitePass;
-		
-		private System.Nullable<int> _practice;
-		
-		private string _notes;
-		
-		public PMUserSite()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string userName
-		{
-			get
-			{
-				return this._userName;
-			}
-			set
-			{
-				if ((this._userName != value))
-				{
-					this._userName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string siteName
-		{
-			get
-			{
-				return this._siteName;
-			}
-			set
-			{
-				if ((this._siteName != value))
-				{
-					this._siteName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteUrl", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string siteUrl
-		{
-			get
-			{
-				return this._siteUrl;
-			}
-			set
-			{
-				if ((this._siteUrl != value))
-				{
-					this._siteUrl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteId", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string siteId
-		{
-			get
-			{
-				return this._siteId;
-			}
-			set
-			{
-				if ((this._siteId != value))
-				{
-					this._siteId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sitePass", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string sitePass
-		{
-			get
-			{
-				return this._sitePass;
-			}
-			set
-			{
-				if ((this._sitePass != value))
-				{
-					this._sitePass = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_practice", DbType="Int")]
-		public System.Nullable<int> practice
-		{
-			get
-			{
-				return this._practice;
-			}
-			set
-			{
-				if ((this._practice != value))
-				{
-					this._practice = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
-		public string notes
-		{
-			get
-			{
-				return this._notes;
-			}
-			set
-			{
-				if ((this._notes != value))
-				{
-					this._notes = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Practice Table]")]
 	public partial class Practice_Table : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -614,6 +350,418 @@ namespace Password_Manager
 					this._PracticeName = value;
 					this.SendPropertyChanged("PracticeName");
 					this.OnPracticeNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PMUserSites")]
+	public partial class PMUserSite : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _userName;
+		
+		private string _siteName;
+		
+		private string _siteUrl;
+		
+		private string _siteId;
+		
+		private string _sitePass;
+		
+		private int _practice;
+		
+		private string _notes;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnuserNameChanging(string value);
+    partial void OnuserNameChanged();
+    partial void OnsiteNameChanging(string value);
+    partial void OnsiteNameChanged();
+    partial void OnsiteUrlChanging(string value);
+    partial void OnsiteUrlChanged();
+    partial void OnsiteIdChanging(string value);
+    partial void OnsiteIdChanged();
+    partial void OnsitePassChanging(string value);
+    partial void OnsitePassChanged();
+    partial void OnpracticeChanging(int value);
+    partial void OnpracticeChanged();
+    partial void OnnotesChanging(string value);
+    partial void OnnotesChanged();
+    #endregion
+		
+		public PMUserSite()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string userName
+		{
+			get
+			{
+				return this._userName;
+			}
+			set
+			{
+				if ((this._userName != value))
+				{
+					this.OnuserNameChanging(value);
+					this.SendPropertyChanging();
+					this._userName = value;
+					this.SendPropertyChanged("userName");
+					this.OnuserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string siteName
+		{
+			get
+			{
+				return this._siteName;
+			}
+			set
+			{
+				if ((this._siteName != value))
+				{
+					this.OnsiteNameChanging(value);
+					this.SendPropertyChanging();
+					this._siteName = value;
+					this.SendPropertyChanged("siteName");
+					this.OnsiteNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteUrl", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string siteUrl
+		{
+			get
+			{
+				return this._siteUrl;
+			}
+			set
+			{
+				if ((this._siteUrl != value))
+				{
+					this.OnsiteUrlChanging(value);
+					this.SendPropertyChanging();
+					this._siteUrl = value;
+					this.SendPropertyChanged("siteUrl");
+					this.OnsiteUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteId", DbType="NVarChar(50)")]
+		public string siteId
+		{
+			get
+			{
+				return this._siteId;
+			}
+			set
+			{
+				if ((this._siteId != value))
+				{
+					this.OnsiteIdChanging(value);
+					this.SendPropertyChanging();
+					this._siteId = value;
+					this.SendPropertyChanged("siteId");
+					this.OnsiteIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sitePass", DbType="NVarChar(50)")]
+		public string sitePass
+		{
+			get
+			{
+				return this._sitePass;
+			}
+			set
+			{
+				if ((this._sitePass != value))
+				{
+					this.OnsitePassChanging(value);
+					this.SendPropertyChanging();
+					this._sitePass = value;
+					this.SendPropertyChanged("sitePass");
+					this.OnsitePassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_practice", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int practice
+		{
+			get
+			{
+				return this._practice;
+			}
+			set
+			{
+				if ((this._practice != value))
+				{
+					this.OnpracticeChanging(value);
+					this.SendPropertyChanging();
+					this._practice = value;
+					this.SendPropertyChanged("practice");
+					this.OnpracticeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
+		public string notes
+		{
+			get
+			{
+				return this._notes;
+			}
+			set
+			{
+				if ((this._notes != value))
+				{
+					this.OnnotesChanging(value);
+					this.SendPropertyChanging();
+					this._notes = value;
+					this.SendPropertyChanged("notes");
+					this.OnnotesChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PMCompanySites")]
+	public partial class PMCompanySite : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _siteName;
+		
+		private int _practice;
+		
+		private string _siteId;
+		
+		private string _sitePass;
+		
+		private string _siteUrl;
+		
+		private string _lastChanged;
+		
+		private string _notes;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnsiteNameChanging(string value);
+    partial void OnsiteNameChanged();
+    partial void OnpracticeChanging(int value);
+    partial void OnpracticeChanged();
+    partial void OnsiteIdChanging(string value);
+    partial void OnsiteIdChanged();
+    partial void OnsitePassChanging(string value);
+    partial void OnsitePassChanged();
+    partial void OnsiteUrlChanging(string value);
+    partial void OnsiteUrlChanged();
+    partial void OnlastChangedChanging(string value);
+    partial void OnlastChangedChanged();
+    partial void OnnotesChanging(string value);
+    partial void OnnotesChanged();
+    #endregion
+		
+		public PMCompanySite()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string siteName
+		{
+			get
+			{
+				return this._siteName;
+			}
+			set
+			{
+				if ((this._siteName != value))
+				{
+					this.OnsiteNameChanging(value);
+					this.SendPropertyChanging();
+					this._siteName = value;
+					this.SendPropertyChanged("siteName");
+					this.OnsiteNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_practice", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int practice
+		{
+			get
+			{
+				return this._practice;
+			}
+			set
+			{
+				if ((this._practice != value))
+				{
+					this.OnpracticeChanging(value);
+					this.SendPropertyChanging();
+					this._practice = value;
+					this.SendPropertyChanged("practice");
+					this.OnpracticeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteId", DbType="NVarChar(50)")]
+		public string siteId
+		{
+			get
+			{
+				return this._siteId;
+			}
+			set
+			{
+				if ((this._siteId != value))
+				{
+					this.OnsiteIdChanging(value);
+					this.SendPropertyChanging();
+					this._siteId = value;
+					this.SendPropertyChanged("siteId");
+					this.OnsiteIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sitePass", DbType="NVarChar(50)")]
+		public string sitePass
+		{
+			get
+			{
+				return this._sitePass;
+			}
+			set
+			{
+				if ((this._sitePass != value))
+				{
+					this.OnsitePassChanging(value);
+					this.SendPropertyChanging();
+					this._sitePass = value;
+					this.SendPropertyChanged("sitePass");
+					this.OnsitePassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_siteUrl", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string siteUrl
+		{
+			get
+			{
+				return this._siteUrl;
+			}
+			set
+			{
+				if ((this._siteUrl != value))
+				{
+					this.OnsiteUrlChanging(value);
+					this.SendPropertyChanging();
+					this._siteUrl = value;
+					this.SendPropertyChanged("siteUrl");
+					this.OnsiteUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChanged", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string lastChanged
+		{
+			get
+			{
+				return this._lastChanged;
+			}
+			set
+			{
+				if ((this._lastChanged != value))
+				{
+					this.OnlastChangedChanging(value);
+					this.SendPropertyChanging();
+					this._lastChanged = value;
+					this.SendPropertyChanged("lastChanged");
+					this.OnlastChangedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
+		public string notes
+		{
+			get
+			{
+				return this._notes;
+			}
+			set
+			{
+				if ((this._notes != value))
+				{
+					this.OnnotesChanging(value);
+					this.SendPropertyChanging();
+					this._notes = value;
+					this.SendPropertyChanged("notes");
+					this.OnnotesChanged();
 				}
 			}
 		}

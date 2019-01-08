@@ -31,6 +31,7 @@ namespace Password_Manager
         public static string sUsername = "TBD";
         public static bool bIsSuper = false;
         public static bool bWasCompanyMode = false;
+        public static bool bPasswordHidden = true;
 
         cUser cU = new cUser() { User = sUsername };
 
@@ -52,7 +53,11 @@ namespace Password_Manager
                 modeSwitchBtn.Background = Brushes.DarkRed;
                 bWasCompanyMode = true;
                 InitComboBox(sMode);
-                //bool check for IsSuper to enable password editing
+                if (SQLAccess.IsSuperCheck(sUsername))
+                {
+                    EditMenu.IsEnabled = true;
+                }
+                else { EditMenu.IsEnabled = false; }
             }
             else if (sMode == "company")
             {
@@ -60,6 +65,7 @@ namespace Password_Manager
                 modeSwitchBtn.Content = "User";
                 modeSwitchBtn.Background = Brushes.SteelBlue;
                 InitComboBox(sMode);
+                EditMenu.IsEnabled = true;
             }
         }
 
@@ -68,6 +74,8 @@ namespace Password_Manager
             cU.User = sUsername;
             userDecBlock.DataContext = cU;
             InitComboBox(sMode);
+            practiceBox.IsEnabled = false;
+
         }
 
         public void InitComboBox(string sMode)
@@ -96,10 +104,6 @@ namespace Password_Manager
 
                     MessageBox.Show(e.Message);
                 }
-               
-
-                
-               
             }
         }
 
@@ -147,13 +151,81 @@ namespace Password_Manager
                 throw;
             }
         }
+        #endregion
 
         private void AddASiteMenuItem_Click(object sender, RoutedEventArgs e)
         {
             AddWindow aw = new AddWindow();
             aw.Show();
         }
+
+        public void LoadPracticeBoxFromList(List<PMUserSite> list)
+        {
+            practiceBox.Items.Clear();
+            foreach (var p in list)
+            {
+                practiceBox.Items.Add(p.practice);
+            }
+
+        }
+
+                       
+        private void SiteNameBox_DropDownClosed(object sender, EventArgs e)
+        {
+            var sn = siteNameBox.Text;
+            practiceBox.IsEnabled = true;
+            try
+            {
+                using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                {
+                    string query = "Select * from [dbo].[PMUserSites] where siteName = " + sn + ";";
+                    List<PMUserSite> sqllist = new List<PMUserSite>();
+                    sqllist = dc.ExecuteQuery<PMUserSite>(query).ToList();
+                    if (sqllist.Count > 1)
+                    {
+                        LoadPracticeBoxFromList(sqllist);
+                        //make a practice dropdownclosed event to select the pmusersite for that practice,  then display info.
+                    }
+                    else 
+                    {
+                        practiceBox.SelectedValue = sqllist[0].practice;
+                        
+                    }
+
+                        
+
+
+
+
+                }
+                
+                
+
+
+                //if (sMode == "user")
+                //{
+                    
+                //    IdTextBox.Text = site.siteId;
+                //    PassTextBox.Text = site.sitePass;
+                //    NoteBox.Text = site.notes;
+                //}
+                //else if (sMode == "company")
+                //{
+
+                //}
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //if (bPasswordHidden) { ShowPasswordBtn.Content = }
+        }
     }
-#endregion     
+    
 
 }

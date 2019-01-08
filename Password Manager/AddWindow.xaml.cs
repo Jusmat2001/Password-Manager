@@ -19,6 +19,7 @@ namespace Password_Manager
     /// </summary>
     public partial class AddWindow : Window
     {
+        public bool PasswordBoxGotFocus = false;
 
         
 
@@ -79,12 +80,15 @@ namespace Password_Manager
                 MessageBox.Show("Please complete the required fields" );
                 return;
             }
+            if (AddNotesBox.Text == "Notes") { AddNotesBox.Text = null; }
+            if (AddPasswordBox.Text == "Password" && PasswordBoxGotFocus == false ) { AddPasswordBox.Text = null; }
             
             if (AddUserSite())
             {
                 MessageBox.Show("Site added");
             }
         }
+
         #region text clearers
         private void AddSiteNameBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -119,6 +123,7 @@ namespace Password_Manager
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
             tb.GotFocus -= AddPasswordBox_GotFocus;
+            PasswordBoxGotFocus = true;
         }
 
         private void AddNotesBox_GotFocus(object sender, RoutedEventArgs e)

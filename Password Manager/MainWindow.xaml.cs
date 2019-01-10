@@ -32,6 +32,7 @@ namespace Password_Manager
         public static bool bIsSuper = false;
         public static bool bWasCompanyMode = false;
         public static bool bPasswordHidden = true;
+        
 
         cUser cU = new cUser() { User = sUsername };
 
@@ -75,6 +76,7 @@ namespace Password_Manager
             userDecBlock.DataContext = cU;
             InitComboBox(sMode);
             practiceBox.IsEnabled = false;
+            if (bPasswordHidden) { PassTextBox.Foreground = Brushes.White; }
 
         }
 
@@ -89,19 +91,20 @@ namespace Password_Manager
                         var query = from s in dc.PMUserSites
                                     where s.userName == sUsername
                                     select s.siteName.AsEnumerable();
-                        siteNameBox.ItemsSource = query;
+                        var distinct = query.Distinct().ToList();
+                        siteNameBox.ItemsSource = distinct;
 
                     }
                     else if (sMode == "company")
                     {
                         var query = from s in dc.PMCompanySites
                                     select s.siteName.AsEnumerable();
-                        siteNameBox.ItemsSource = query;
+                        var distinct = query.Distinct().ToList();
+                        siteNameBox.ItemsSource = distinct;
                     }
                 }
                 catch (Exception e)
                 {
-
                     MessageBox.Show(e.Message);
                 }
             }
@@ -159,71 +162,91 @@ namespace Password_Manager
             aw.Show();
         }
 
-        public void LoadPracticeBoxFromList(List<PMUserSite> list)
+        public void LoadPracticeBoxFromList(IEnumerable<int> list)
         {
             practiceBox.Items.Clear();
             foreach (var p in list)
             {
-                practiceBox.Items.Add(p.practice);
+                practiceBox.Items.Add(p);
             }
-
         }
 
-                       
-        private void SiteNameBox_DropDownClosed(object sender, EventArgs e)
+        
+
+        public void MultiplePracticeCheck()
         {
             var sn = siteNameBox.Text;
-            practiceBox.IsEnabled = true;
             try
             {
                 using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
                 {
-                    string query = "Select * from [dbo].[PMUserSites] where siteName = " + sn + ";";
-                    List<PMUserSite> sqllist = new List<PMUserSite>();
-                    sqllist = dc.ExecuteQuery<PMUserSite>(query).ToList();
-                    if (sqllist.Count > 1)
+                    var query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
+                    if (query.Count() > 1)
                     {
-                        LoadPracticeBoxFromList(sqllist);
-                        //make a practice dropdownclosed event to select the pmusersite for that practice,  then display info.
+                        practiceBox.IsEnabled = true;
+                        LoadPracticeBoxFromList(query);
                     }
-                    else 
+                    else
                     {
-                        practiceBox.SelectedValue = sqllist[0].practice;
+                        var singlequery = from o in dc.PMUserSites where o.siteName == sn select o;
+                        PMUserSite pmuobj = new PMUserSite();
+                        pmuobj = singlequery.First();
+                        LoadFormFromObj(pmuobj);
+                        practiceBox.Text = "0";
+                        practiceBox.IsEnabled = false;
                         
                     }
-
-                        
-
-
-
-
                 }
-                
-                
-
-
-                //if (sMode == "user")
-                //{
-                    
-                //    IdTextBox.Text = site.siteId;
-                //    PassTextBox.Text = site.sitePass;
-                //    NoteBox.Text = site.notes;
-                //}
-                //else if (sMode == "company")
-                //{
-
-                //}
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }
 
+        public void LoadFormFromObj(PMUserSite obj)
+        {
+            IdTextBox.Text = obj.siteId;
+            PassTextBox.Text = obj.sitePass;
+            NoteBox.Text = obj.notes;
+            UrlBox.Text = obj.siteUrl;
+        }
+
+
+        private void SiteNameBox_DropDownClosed(object sender, EventArgs e)
+        {
+            MultiplePracticeCheck();
+        }
+
         private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-            //if (bPasswordHidden) { ShowPasswordBtn.Content = }
+            if (bPasswordHidden)
+            {
+                bPasswordHidden = false;
+                PassTextBox.Foreground = Brushes.Black;
+                ShowPasswordBtn.Content = FindResource("show");
+            }
+            else 
+            {
+                bPasswordHidden = true;
+                PassTextBox.Foreground = Brushes.White;
+                ShowPasswordBtn.Content = FindResource("hide");
+            }
+            
+
+        }
+
+        private void PracticeBox_DropDownClosed(object sender, EventArgs e)
+        {
+            var prac = Int32.Parse(practiceBox.Text);
+            var sn = siteNameBox.Text;
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                var query = from o in dc.PMUserSites where o.siteName == sn && o.practice == prac select o;
+                PMUserSite pmuobj = new PMUserSite();
+                pmuobj = query.First();
+                LoadFormFromObj(pmuobj);
+            }
         }
     }
     

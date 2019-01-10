@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
         Title="CodeOne Password Manager" Height="217.6" Width="510" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"  BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}" UseLayoutRounding="True" Loaded="Window_Loaded" Closing="Window_Closing" >
+    <Window.Resources>
+        <Image x:Key="show" Source="C:\GitRepos\Password Manager\Password Manager\Password Manager\show eye.png" />
+        <Image x:Key="hide" Source="C:\GitRepos\Password Manager\Password Manager\Password Manager\hide eye.png" />
+    </Window.Resources>
     <Grid>
         <DockPanel Margin="0,0,-0.4,163.6">
             <Menu DockPanel.Dock="Top">
@@ -28,18 +32,17 @@
         <TextBlock x:Name="userDecBlock" HorizontalAlignment="Left" Height="23" Margin="380,113,0,0" TextWrapping="Wrap" Text="{Binding User}" VerticalAlignment="Top" Width="77" FontWeight="Bold" TextDecorations="Underline" FontSize="10" Foreground="#FFA51616" RenderTransformOrigin="0.483,1.217" FontFamily="Euphemia"/>
         <TextBlock HorizontalAlignment="Left" Height="11" Margin="380,97,0,0" TextWrapping="Wrap" Text="Current User:" VerticalAlignment="Top" Width="67" FontSize="10" TextDecorations="Underline" FontWeight="Bold"/>
         <ComboBox x:Name="siteNameBox" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="178" Text="Choose a website..." IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"  DropDownClosed="SiteNameBox_DropDownClosed" />
-        <ComboBox x:Name="practiceBox" HorizontalAlignment="Left" Margin="211,26,0,0" VerticalAlignment="Top" Width="66" Text="Practice" IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+        <ComboBox x:Name="practiceBox" HorizontalAlignment="Left" Margin="211,26,0,0" VerticalAlignment="Top" Width="66" Text="Practice" IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" DropDownClosed="PracticeBox_DropDownClosed" ToolTip="0 means no specific practice"/>
         <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Height="23" Margin="10,113,0,0" TextWrapping="Wrap" Text="Site Id" VerticalAlignment="Top" Width="109"/>
-        <RichTextBox x:Name="UrlBox" HorizontalAlignment="Left" Height="23" Margin="10,69,0,0" VerticalAlignment="Top" Width="332" RenderTransformOrigin="0.514,-0.687" IsDocumentEnabled="True" IsReadOnly="True">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text= "Site URL"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
+
         <TextBox x:Name="PassTextBox" HorizontalAlignment="Left" Height="23" Margin="183,113,0,0" TextWrapping="Wrap" Text="Site Password" VerticalAlignment="Top" Width="110"/>
         <TextBlock x:Name="NoteBox" HorizontalAlignment="Left" Height="39" Margin="10,141,0,0" TextWrapping="Wrap" Text="Remember to update Password Manager if you change any login info online." VerticalAlignment="Top" Width="474" Foreground="#FFC01B1B" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Padding="2"/>
-        <Button x:Name="ShowPasswordBtn" Content="" HorizontalAlignment="Left" Margin="298,113,0,0" VerticalAlignment="Top" Width="21" Height="23" Click="ShowPasswordBtn_Click"/>
+        <Button x:Name="ShowPasswordBtn" Content="" HorizontalAlignment="Left" Margin="298,113,0,0" VerticalAlignment="Top" Width="21" Height="23" Click="ShowPasswordBtn_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="hide eye.png"/>
+            </Button.Background>
+        </Button>
+        <TextBlock x:Name="UrlBox" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="Site URL" VerticalAlignment="Top" Width="355" Height="19"/>
 
     </Grid>
 </Window>

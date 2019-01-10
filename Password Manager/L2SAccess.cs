@@ -10,17 +10,17 @@ namespace Password_Manager
 
     public partial class PMUserSite
     {
-        public PMUserSite (string siteName)
+        public PMUserSite (string siteId, string sitePass, string notes, string siteUrl)
         {
-            
+            _siteId = siteId;
+            _sitePass = sitePass;
+            _notes = notes;
+            _siteUrl = siteUrl;
         }
 
         public void LoadPMUserSite(PMUserSite obj)
         {
-            siteId = obj.siteId;
-            sitePass = obj.sitePass;
-            notes = obj.notes;
-            siteUrl = obj.siteUrl;
+            
 
         }
     }

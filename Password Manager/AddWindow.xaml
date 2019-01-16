@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
-        Title="Add Website" Height="285.634" Width="400" Background="#FFA89F9F" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Add Website" Height="285.634" Width="400" Background="#FF60A037" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="AddSiteNameBox" HorizontalAlignment="Left" Height="23" Margin="21,10,0,0" TextWrapping="Wrap" Text="Site Name" VerticalAlignment="Top" Width="155" TabIndex="0" GotFocus="AddSiteNameBox_GotFocus"/>
         <TextBox x:Name="AddWebAddressBox" HorizontalAlignment="Left" Height="23" Margin="21,38,0,0" TextWrapping="Wrap" Text="Web Address" VerticalAlignment="Top" Width="354" TabIndex="2"  GotFocus="AddWebAddressBox_GotFocus"/>

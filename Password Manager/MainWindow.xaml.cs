@@ -173,9 +173,9 @@ namespace Password_Manager
 
         
 
-        public void MultiplePracticeCheck()
+        public void MultiplePracticeCheck(string sn)
         {
-            var sn = siteNameBox.Text;
+            
             try
             {
                 using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
@@ -215,7 +215,8 @@ namespace Password_Manager
 
         private void SiteNameBox_DropDownClosed(object sender, EventArgs e)
         {
-            MultiplePracticeCheck();
+            var sn = siteNameBox.Text;
+            MultiplePracticeCheck(sn);
         }
 
         private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
@@ -247,6 +248,11 @@ namespace Password_Manager
                 pmuobj = query.First();
                 LoadFormFromObj(pmuobj);
             }
+        }
+
+        private void EditASiteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
     

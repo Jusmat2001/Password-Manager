@@ -27,7 +27,7 @@ namespace Password_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string sMode = "user";
+        public bool bModeisCompany = false;
         public static string sUsername = "TBD";
         public static bool bIsSuper = false;
         public static bool bWasCompanyMode = false;
@@ -47,25 +47,25 @@ namespace Password_Manager
 
         private void modeSwitchBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (sMode == "user")
+            if (!bModeisCompany)
             {
-                sMode = "company";
+                bModeisCompany= true;
                 modeSwitchBtn.Content = "CodeOne";
                 modeSwitchBtn.Background = Brushes.DarkRed;
                 bWasCompanyMode = true;
-                InitComboBox(sMode);
+                InitComboBox(bModeisCompany);
                 if (SQLAccess.IsSuperCheck(sUsername))
                 {
                     EditMenu.IsEnabled = true;
                 }
                 else { EditMenu.IsEnabled = false; }
             }
-            else if (sMode == "company")
+            else if (bModeisCompany)
             {
-                sMode = "user";
+                bModeisCompany = false ;
                 modeSwitchBtn.Content = "User";
                 modeSwitchBtn.Background = Brushes.SteelBlue;
-                InitComboBox(sMode);
+                InitComboBox(bModeisCompany);
                 EditMenu.IsEnabled = true;
             }
         }
@@ -74,28 +74,27 @@ namespace Password_Manager
         {
             cU.User = sUsername;
             userDecBlock.DataContext = cU;
-            InitComboBox(sMode);
+            InitComboBox(bModeisCompany);
             practiceBox.IsEnabled = false;
             if (bPasswordHidden) { PassTextBox.Foreground = Brushes.White; }
 
         }
 
-        public void InitComboBox(string sMode)
+        public void InitComboBox(bool bModeisCompany)
         {
             using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
             {
                 try
                 {
-                    if (sMode == "user")
+                    if (!bModeisCompany)
                     {
                         var query = from s in dc.PMUserSites
                                     where s.userName == sUsername
                                     select s.siteName.AsEnumerable();
                         var distinct = query.Distinct().ToList();
                         siteNameBox.ItemsSource = distinct;
-
                     }
-                    else if (sMode == "company")
+                    else if (bModeisCompany)
                     {
                         var query = from s in dc.PMCompanySites
                                     select s.siteName.AsEnumerable();
@@ -171,36 +170,23 @@ namespace Password_Manager
             }
         }
 
-        
 
-        public void MultiplePracticeCheck(string sn)
+
+        
+        public IEnumerable<int> MultiplePracticeCheck(string sn)
         {
-            
-            try
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
             {
-                using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                if (bModeisCompany)
+                {
+                    var query = from o in dc.PMCompanySites.AsEnumerable() where o.siteName == sn select o.practice;
+                    return query;
+                }
+                else
                 {
                     var query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
-                    if (query.Count() > 1)
-                    {
-                        practiceBox.IsEnabled = true;
-                        LoadPracticeBoxFromList(query);
-                    }
-                    else
-                    {
-                        var singlequery = from o in dc.PMUserSites where o.siteName == sn select o;
-                        PMUserSite pmuobj = new PMUserSite();
-                        pmuobj = singlequery.First();
-                        LoadFormFromObj(pmuobj);
-                        practiceBox.Text = "0";
-                        practiceBox.IsEnabled = false;
-                        
-                    }
+                    return query;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -216,7 +202,20 @@ namespace Password_Manager
         private void SiteNameBox_DropDownClosed(object sender, EventArgs e)
         {
             var sn = siteNameBox.Text;
-            MultiplePracticeCheck(sn);
+            var practiceList = MultiplePracticeCheck(sn);
+            if (practiceList.Count() > 1) { practiceBox.IsEnabled = true; LoadPracticeBoxFromList(practiceList); }
+            else
+            {
+                using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                {
+                    var singlequery = from o in dc.PMUserSites where o.siteName == sn select o;
+                    PMUserSite pmuobj = new PMUserSite();
+                    pmuobj = singlequery.First();
+                    LoadFormFromObj(pmuobj);
+                }
+                practiceBox.Text = "0";
+                practiceBox.IsEnabled = false;
+            }
         }
 
         private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
@@ -252,7 +251,8 @@ namespace Password_Manager
 
         private void EditASiteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            EditSiteWindow ew = new EditSiteWindow();
+            ew.Show();
         }
     }
     

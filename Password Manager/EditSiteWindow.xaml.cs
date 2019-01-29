@@ -22,6 +22,47 @@ namespace Password_Manager
         public EditSiteWindow()
         {
             InitializeComponent();
+            
+            InitComboBox();
+        }
+
+        public void InitComboBox()
+        {
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                try
+                {
+                    if (!MainWindow.bModeisCompany)
+                    {
+                        var query = from s in dc.PMUserSites
+                                    where s.userName == MainWindow.sUsername
+                                    select s.siteName.AsEnumerable();
+                        var distinct = query.Distinct().ToList();
+                        EditSiteNameBox.ItemsSource = distinct;
+                    }
+                    else if (MainWindow.bModeisCompany)
+                    {
+                        var query = from s in dc.PMCompanySites
+                                    select s.siteName.AsEnumerable();
+                        var distinct = query.Distinct().ToList();
+                        EditSiteNameBox.ItemsSource = distinct;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void EditSiteNameBox_DropDownClosed(object sender, EventArgs e)
+        {
+
         }
     }
 }

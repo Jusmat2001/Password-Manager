@@ -29,6 +29,7 @@ namespace Password_Manager
         {
             m_parent = parent;
             InitializeComponent();
+            //Use to reset app data for debugging 
             //Properties.Settings.Default.Reset();
             InitData();
         }
@@ -41,7 +42,7 @@ namespace Password_Manager
         {
             if (Properties.Settings.Default.UserName != string.Empty)
             {
-                if (Properties.Settings.Default.Remme == "yes")
+                if (Properties.Settings.Default.Remme == "yes")//if remember me checked, it will autofill crypted password. if not just username
                 {
                     lwNameBox.Text = Properties.Settings.Default.UserName;
                     SecureString password = Crypt.DecryptString(Properties.Settings.Default.Password);
@@ -57,7 +58,7 @@ namespace Password_Manager
 
         private void SaveData()
         {
-            if ((bool) remmeCheckbox.IsChecked)
+            if ((bool) remmeCheckbox.IsChecked)//if checked, saves username and password and encrypts pass. 
             {
                 Properties.Settings.Default.UserName = lwNameBox.Text;
                 SecureString password = Crypt.ToSecureString(lwPassBox.Password);
@@ -103,7 +104,7 @@ namespace Password_Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.FirstRun)
+            if (Properties.Settings.Default.FirstRun)//if first run setting is true, load first run window
             {
                 
                 this.Hide();

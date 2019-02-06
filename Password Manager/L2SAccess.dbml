@@ -34,8 +34,9 @@
       <Column Name="siteId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="sitePass" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="siteUrl" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="lastChanged" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lastChanged" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="lastChangedBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

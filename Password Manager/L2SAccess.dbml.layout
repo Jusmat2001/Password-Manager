@@ -20,10 +20,10 @@
         <elementListCompartment Id="0bc9033b-48ce-4d62-ab85-de0ca6921163" absoluteBounds="5.015, 4.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="76fb2300-625d-421b-9b7e-38848f7be49b" absoluteBounds="5, 1.5, 2, 2.1554996744791666">
+    <classShape Id="8224eeb1-4f63-4a7f-9897-7bd5e828618a" absoluteBounds="5, 1.375, 2, 2.3478011067708335">
       <DataClassMoniker Name="/L2SAccessDataContext/PMCompanySite" />
       <nestedChildShapes>
-        <elementListCompartment Id="cfc1338a-d452-42ad-af1e-6625181020bf" absoluteBounds="5.015, 1.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f730b4ab-8bf8-4394-8f49-4225c6a3d577" absoluteBounds="5.015, 1.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

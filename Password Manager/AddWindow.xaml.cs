@@ -55,7 +55,7 @@ namespace Password_Manager
                     pmu.practice = Int32.Parse(AddPracticeBox.SelectedValue.ToString());
                     pmu.siteName = AddSiteNameBox.Text;
                     pmu.siteUrl = AddWebAddressBox.Text;
-                    pmu.siteId = AddUsernameBox.Text;
+                    pmu.siteId = AddLoginIdBox.Text;
                     pmu.sitePass = AddPasswordBox.Text;
                     pmu.userName = MainWindow.sUsername;
                     pmu.notes = AddNotesBox.Text;
@@ -69,13 +69,38 @@ namespace Password_Manager
                 MessageBox.Show(e.Message);
                 return false;
             }
+        }
 
-            
+        public bool AddCompanySite()
+        {
+            try
+            {
+                using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                {
+                    PMCompanySite pmc = new PMCompanySite();
+                    pmc.practice = Int32.Parse(AddPracticeBox.SelectedValue.ToString());
+                    pmc.siteName = AddSiteNameBox.Text;
+                    pmc.siteUrl = AddWebAddressBox.Text;
+                    pmc.siteId = AddLoginIdBox.Text;
+                    pmc.sitePass = AddPasswordBox.Text;
+                    pmc.lastChanged = DateTime.Now;
+                    pmc.notes = AddNotesBox.Text;
+                    pmc.lastChangedBy = MainWindow.sUsername;
+                    dc.PMCompanySites.InsertOnSubmit(pmc);
+                    dc.SubmitChanges();
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (AddSiteNameBox.Text == string.Empty || AddWebAddressBox.Text == string.Empty || AddUsernameBox.Text == string.Empty || AddPracticeBox.SelectedValue == null)
+            if (AddSiteNameBox.Text == string.Empty || AddWebAddressBox.Text == string.Empty || AddLoginIdBox.Text == string.Empty || AddPracticeBox.SelectedValue == null)
             {
                 MessageBox.Show("Please complete the required fields" );
                 return;
@@ -83,9 +108,21 @@ namespace Password_Manager
             if (AddNotesBox.Text == "Notes") { AddNotesBox.Text = null; }
             if (AddPasswordBox.Text == "Password" && PasswordBoxGotFocus == false ) { AddPasswordBox.Text = null; }
             
-            if (AddUserSite())
+            if (MainWindow.bModeisCompany)
             {
-                MessageBox.Show("Site added");
+                if (AddCompanySite())
+                {
+                    MessageBox.Show("Company site added");
+                }
+                else { MessageBox.Show("Site not added"); }
+            }
+            else if (!MainWindow.bModeisCompany)
+            {
+                if (AddUserSite())
+                {
+                    MessageBox.Show("User site added");
+                }
+                else { MessageBox.Show("Site not added"); }
             }
         }
 

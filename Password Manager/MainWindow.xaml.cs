@@ -17,8 +17,8 @@ using System.Configuration;
 using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Deployment;
 using System.Deployment.Application;
-
 
 namespace Password_Manager
 {
@@ -135,24 +135,28 @@ namespace Password_Manager
         }
         #endregion
         #region Version display
-        public Version AssemblyVersion
-        {
-            get
-            {
-                return ApplicationDeployment.CurrentDeployment.CurrentVersion;
-            }
-        }
+        //public Version AssemblyVersion
+        //{
+        //    get
+        //    {
+        //        return ApplicationDeployment.CurrentDeployment.CurrentVersion;
+        //    }
+        //}
 
         private void VersionMenuItem_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                MessageBox.Show("Version: " + AssemblyVersion.Major + "." + AssemblyVersion.Minor + "." + AssemblyVersion.Build + "." + AssemblyVersion.Revision);
+                Version myVersion;
+
+                //if (ApplicationDeployment.IsNetworkDeployed)
+                myVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                var msg = string.Concat("ClickOnce published Version: "+myVersion);
+                MessageBox.Show(msg);
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                Console.WriteLine(exception);
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
         #endregion
@@ -172,11 +176,6 @@ namespace Password_Manager
             }
         }
 
-
-
-        
-        
-
         public void LoadFormFromObj(PMUserSite obj)
         {
             IdTextBox.Text = obj.siteId;
@@ -184,7 +183,6 @@ namespace Password_Manager
             NoteBox.Text = obj.notes;
             UrlBox.Text = obj.siteUrl;
         }
-
 
         private void SiteNameBox_DropDownClosed(object sender, EventArgs e)
         {
@@ -249,6 +247,11 @@ namespace Password_Manager
         {
             EditSiteWindow ew = new EditSiteWindow();
             ew.Show();
+        }
+
+        private void DeleteASiteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Will be added in a future version. Please email Justin if you want a site removed. ");
         }
     }
     

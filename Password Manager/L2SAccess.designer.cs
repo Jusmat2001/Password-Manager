@@ -597,9 +597,11 @@ namespace Password_Manager
 		
 		private string _siteUrl;
 		
-		private string _lastChanged;
+		private System.DateTime _lastChanged;
 		
 		private string _notes;
+		
+		private string _lastChangedBy;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -615,10 +617,12 @@ namespace Password_Manager
     partial void OnsitePassChanged();
     partial void OnsiteUrlChanging(string value);
     partial void OnsiteUrlChanged();
-    partial void OnlastChangedChanging(string value);
+    partial void OnlastChangedChanging(System.DateTime value);
     partial void OnlastChangedChanged();
     partial void OnnotesChanging(string value);
     partial void OnnotesChanged();
+    partial void OnlastChangedByChanging(string value);
+    partial void OnlastChangedByChanged();
     #endregion
 		
 		public PMCompanySite()
@@ -726,8 +730,8 @@ namespace Password_Manager
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChanged", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string lastChanged
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChanged", DbType="DateTime NOT NULL")]
+		public System.DateTime lastChanged
 		{
 			get
 			{
@@ -762,6 +766,26 @@ namespace Password_Manager
 					this._notes = value;
 					this.SendPropertyChanged("notes");
 					this.OnnotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChangedBy", DbType="NVarChar(50)")]
+		public string lastChangedBy
+		{
+			get
+			{
+				return this._lastChangedBy;
+			}
+			set
+			{
+				if ((this._lastChangedBy != value))
+				{
+					this.OnlastChangedByChanging(value);
+					this.SendPropertyChanging();
+					this._lastChangedBy = value;
+					this.SendPropertyChanged("lastChangedBy");
+					this.OnlastChangedByChanged();
 				}
 			}
 		}

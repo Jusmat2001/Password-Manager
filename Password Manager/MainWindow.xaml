@@ -19,7 +19,7 @@
                 <MenuItem Header="_Edit" x:Name="EditMenu" >
                     <MenuItem x:Name="AddASiteMenuItem" Header="_Add a Site" Click="AddASiteMenuItem_Click" />
                     <MenuItem x:Name="EditASiteMenuItem" Header="_Edit a Site" Click="EditASiteMenuItem_Click"/>
-                    <MenuItem x:Name="DeleteASiteMenuItem" Header="_Delete a Site"/>
+                    <MenuItem x:Name="DeleteASiteMenuItem" Header="_Delete a Site" Click="DeleteASiteMenuItem_Click"/>
                 </MenuItem>
 
             </Menu>
@@ -33,7 +33,7 @@
         <TextBlock HorizontalAlignment="Left" Height="11" Margin="380,97,0,0" TextWrapping="Wrap" Text="Current User:" VerticalAlignment="Top" Width="67" FontSize="10" TextDecorations="Underline" FontWeight="Bold"/>
         <ComboBox x:Name="siteNameBox" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="178" Text="Choose a website..." IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"  DropDownClosed="SiteNameBox_DropDownClosed" />
         <ComboBox x:Name="practiceBox" HorizontalAlignment="Left" Margin="211,26,0,0" VerticalAlignment="Top" Width="66" Text="Practice" IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" DropDownClosed="PracticeBox_DropDownClosed" ToolTip="0 means no specific practice"/>
-        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Height="23" Margin="10,113,0,0" TextWrapping="Wrap" Text="Site Id" VerticalAlignment="Top" Width="109"/>
+        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Height="23" Margin="10,113,0,0" TextWrapping="Wrap" Text="Login Id" VerticalAlignment="Top" Width="109"/>
 
         <TextBox x:Name="PassTextBox" HorizontalAlignment="Left" Height="23" Margin="183,113,0,0" TextWrapping="Wrap" Text="Site Password" VerticalAlignment="Top" Width="110"/>
         <TextBlock x:Name="NoteBox" HorizontalAlignment="Left" Height="39" Margin="10,141,0,0" TextWrapping="Wrap" Text="Remember to update Password Manager if you change any login info online." VerticalAlignment="Top" Width="474" Foreground="#FFC01B1B" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Padding="2"/>

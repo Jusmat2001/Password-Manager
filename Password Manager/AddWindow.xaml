@@ -21,6 +21,7 @@
         <Button x:Name="AddBtn" Content="Add" HorizontalAlignment="Left" Margin="192,218,0,0" VerticalAlignment="Top" Width="75" Click="AddBtn_Click" TabIndex="6"/>
         <Button x:Name="Cancelbtn" Content="Cancel" HorizontalAlignment="Left" Margin="272,218,0,0" VerticalAlignment="Top" Width="75" Click="Cancelbtn_Click" TabIndex="7" />
         <ComboBox x:Name="AddPracticeBox" HorizontalAlignment="Left" Height="23" Margin="223,10,0,0" VerticalAlignment="Top" Width="71" IsEnabled="True" IsEditable="True"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="156,66,0,0" TextWrapping="Wrap" Text="Copy and paste Web Address from the address bar of your internet browser" VerticalAlignment="Top" Width="219" FontSize="9"/>
 
     </Grid>
 </Window>

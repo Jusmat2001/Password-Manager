@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
-        Title="Register" Height="250" Width="300" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closed="Window_Closed" >
+        Title="Register" Height="269.37" Width="300" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closed="Window_Closed" >
     <Grid>
         <TextBlock HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" TextWrapping="Wrap" Text="Welcome to Password Manager. " VerticalAlignment="Top" Width="274" FontSize="18" FontWeight="Bold" Foreground="#FF205896"/>
         <TextBox x:Name="fNameBox" TabIndex="0"  HorizontalAlignment="Left" Height="23" Margin="95,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="189"/>
@@ -13,9 +13,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,88,0,0" TextWrapping="Wrap" Text="First name:" VerticalAlignment="Top" Height="23" Width="80"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,116,0,0" TextWrapping="Wrap" Text="Last name:" VerticalAlignment="Top" Height="23" Width="80"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,144,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Height="23" Width="80"/>
-        <TextBlock HorizontalAlignment="Center" Height="37" Margin="15,46,9.6,0" TextWrapping="Wrap" Text="Please register your information." VerticalAlignment="Top" Width="269" FontSize="16" FontWeight="Bold" Foreground="#FF205896"/>
-        <Button x:Name="doneBtn" TabIndex="3" Content="Done!" HorizontalAlignment="Left" Margin="95,191,0,0" VerticalAlignment="Top" Width="112" Click="doneBtn_Click"/>
+        <TextBlock Height="37" Margin="10,46,9.6,0" TextWrapping="Wrap" Text="Please register your information." VerticalAlignment="Top" Width="274" FontSize="16" FontWeight="Bold" Foreground="#FF205896" HorizontalAlignment="Center" Padding="10,0,0,0"/>
+        <Button x:Name="doneBtn" TabIndex="3" Content="Done!" HorizontalAlignment="Left" Margin="95,172,0,0" VerticalAlignment="Top" Width="112" Click="doneBtn_Click"/>
         <PasswordBox x:Name="passBox" TabIndex="2" HorizontalAlignment="Left" Height="23" Margin="95,144,0,0" VerticalAlignment="Top" Width="189"/>
+        <Button x:Name="AlreadyRegisteredBtn" Content="Already Registered?" HorizontalAlignment="Left" Margin="216,216,0,0" VerticalAlignment="Top" Width="68" Height="16" FontSize="7" Click="Button_Click"/>
 
 
     </Grid>

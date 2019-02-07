@@ -12,7 +12,7 @@
     </Window.Resources>
     <Grid>
         <DockPanel Margin="0,0,-0.4,163.6">
-            <Menu DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top" Height="24">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Version" x:Name="VersionMenuItem" Click="VersionMenuItem_Click"/>
                 </MenuItem>
@@ -28,7 +28,7 @@
 
         <Button x:Name="IdCopyBtn" Content="Copy" Height="23" VerticalAlignment="Top" Margin="124,113,337,0" ToolTip="Copies Site Id to Clipboard. Ctrl+V to paste." Click="IdCopyBtn_Click"/>
         <Button x:Name="PassCopyBtn" Content="Copy" Height="23" VerticalAlignment="Top" ToolTip="Copies Site Password to Clipboard. Ctrl+V to paste." Margin="321,113,139,0" Click="PassCopyBtn_Click"/>
-        <Button x:Name="modeSwitchBtn" Content="Switch Mode" HorizontalAlignment="Left" Height="37" Margin="380,26,0,0" VerticalAlignment="Top" Width="104" Click="modeSwitchBtn_Click" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="modeSwitchBtn" Content="User" HorizontalAlignment="Left" Height="37" Margin="380,26,0,0" VerticalAlignment="Top" Width="104" Click="modeSwitchBtn_Click" FontSize="16" FontWeight="Bold"/>
         <TextBlock x:Name="userDecBlock" HorizontalAlignment="Left" Height="23" Margin="380,113,0,0" TextWrapping="Wrap" Text="{Binding User}" VerticalAlignment="Top" Width="77" FontWeight="Bold" TextDecorations="Underline" FontSize="10" Foreground="#FFA51616" RenderTransformOrigin="0.483,1.217" FontFamily="Euphemia"/>
         <TextBlock HorizontalAlignment="Left" Height="11" Margin="380,97,0,0" TextWrapping="Wrap" Text="Current User:" VerticalAlignment="Top" Width="67" FontSize="10" TextDecorations="Underline" FontWeight="Bold"/>
         <ComboBox x:Name="siteNameBox" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="178" Text="Choose a website..." IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"  DropDownClosed="SiteNameBox_DropDownClosed" />
@@ -42,7 +42,13 @@
                 <ImageBrush ImageSource="hide eye.png"/>
             </Button.Background>
         </Button>
-        <TextBlock x:Name="UrlBox" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="Site URL" VerticalAlignment="Top" Width="355" Height="19"/>
+        <RichTextBox x:Name="UrlBox" HorizontalAlignment="Left" Margin="10,53,0,0"  VerticalAlignment="Top" Width="355" Height="55" IsReadOnly="True" IsDocumentEnabled="True">
+            <FlowDocument>
+                <Paragraph>
+
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
     </Grid>
 </Window>

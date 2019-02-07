@@ -36,6 +36,13 @@ namespace Password_Manager
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            safeclose = true;
+            this.Close();
+            l_parent.Show();
+        }
+
         public FirstRun()
         {
         }
@@ -59,6 +66,7 @@ namespace Password_Manager
                 }
                 if (fNameBox.Text != string.Empty && lNameBox.Text != string.Empty && passBox.Password != string.Empty)
                 {
+                    
                     sfirstname = fNameBox.Text.ToLower();
                     slastname = lNameBox.Text.ToLower();
                     spass = passBox.Password.ToLower();

@@ -38,6 +38,8 @@ namespace Password_Manager
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.FirstRun = false;
+            Properties.Settings.Default.Save();
             safeclose = true;
             this.Close();
             l_parent.Show();

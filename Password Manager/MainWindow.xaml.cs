@@ -29,7 +29,7 @@ namespace Password_Manager
     /// 
     public partial class MainWindow : Window
     {
-        public static bool bModeisCompany = false;
+        public static bool bModeisCompany = true;
         public static string sUsername = "TBD";
         public static bool bIsSuper = false;
         public static bool bWasCompanyMode = false;
@@ -236,6 +236,15 @@ namespace Password_Manager
                             query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
                         }
                         if (query.Count() > 1) { practiceBox.IsEnabled = true; LoadPracticeBoxFromList(query); }
+                        else if (bModeisCompany)
+                        {
+                            var singlequery = from o in dc.PMCompanySites where o.siteName == sn select o;
+                            PMCompanySite pmcobj = new PMCompanySite();
+                            pmcobj = singlequery.First();
+                            LoadCompanySite(pmcobj);
+                            practiceBox.Text = "0";
+                            practiceBox.IsEnabled = false;
+                        }
                         else
                         {
                             var singlequery = from o in dc.PMUserSites where o.siteName == sn select o;
@@ -263,13 +272,13 @@ namespace Password_Manager
             {
                 bPasswordHidden = false;
                 PassTextBox.Foreground = Brushes.Black;
-                ShowPasswordBtn.Content = FindResource("show");
+                ShowPasswordBtn.Content = "Hide";
             }
             else 
             {
                 bPasswordHidden = true;
                 PassTextBox.Foreground = Brushes.White;
-                ShowPasswordBtn.Content = FindResource("hide");
+                ShowPasswordBtn.Content = "Show";
             }
             
 
@@ -310,6 +319,11 @@ namespace Password_Manager
         private void DeleteASiteMenuItem_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Will be added in a future version. Please email Justin if you want a site removed. ");
+        }
+
+        private void RefreshListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            InitComboBox();
         }
     }
     

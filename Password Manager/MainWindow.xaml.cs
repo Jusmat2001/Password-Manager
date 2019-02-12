@@ -286,28 +286,36 @@ namespace Password_Manager
 
         private void PracticeBox_DropDownClosed(object sender, EventArgs e)
         {
-            var prac = Int32.Parse(practiceBox.Text);
-            var sn = siteNameBox.Text;
-            if (!string.IsNullOrEmpty(sn) && (!string.IsNullOrEmpty(prac.ToString())))
+            try
             {
-                using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                var prac = Int32.Parse(practiceBox.Text);
+                var sn = siteNameBox.Text;
+                if (!string.IsNullOrEmpty(sn) && (!string.IsNullOrEmpty(prac.ToString())))
                 {
-                    if (!bModeisCompany)
+                    using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
                     {
-                        var query = from o in dc.PMUserSites where o.siteName == sn && o.practice == prac select o;
-                        PMUserSite pmuobj = new PMUserSite();
-                        pmuobj = query.First();
-                        LoadUserSite(pmuobj);
-                    }
-                    else if (bModeisCompany)
-                    {
-                        var query = from o in dc.PMCompanySites where o.siteName == sn && o.practice == prac select o;
-                        PMCompanySite pmcobj = new PMCompanySite();
-                        pmcobj = query.First();
-                        LoadCompanySite(pmcobj);
+                        if (!bModeisCompany)
+                        {
+                            var query = from o in dc.PMUserSites where o.siteName == sn && o.practice == prac select o;
+                            PMUserSite pmuobj = new PMUserSite();
+                            pmuobj = query.First();
+                            LoadUserSite(pmuobj);
+                        }
+                        else if (bModeisCompany)
+                        {
+                            var query = from o in dc.PMCompanySites where o.siteName == sn && o.practice == prac select o;
+                            PMCompanySite pmcobj = new PMCompanySite();
+                            pmcobj = query.First();
+                            LoadCompanySite(pmcobj);
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void EditASiteMenuItem_Click(object sender, RoutedEventArgs e)

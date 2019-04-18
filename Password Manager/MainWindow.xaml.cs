@@ -172,6 +172,7 @@ namespace Password_Manager
             {
                 practiceBox.Items.Add(p);
             }
+            practiceBox.Background = Brushes.GreenYellow;
         }
 
         public void LoadUserSite(PMUserSite obj)
@@ -221,6 +222,10 @@ namespace Password_Manager
         {
             var sn = siteNameBox.Text;
             IEnumerable<int> query = null;
+            IdTextBox.Clear();
+            PassTextBox.Clear();
+            UrlBox.Document.Blocks.Clear();
+            NoteBox.Text = "";
             using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
             {
                 if (!string.IsNullOrEmpty(sn))
@@ -235,7 +240,7 @@ namespace Password_Manager
                         {
                             query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
                         }
-                        if (query.Count() > 1) { practiceBox.IsEnabled = true; LoadPracticeBoxFromList(query); }
+                        if (query.Count() > 1) { practiceBox.IsEnabled = true; LoadPracticeBoxFromList(query); practiceBox.Text = "0"; }
                         else if (bModeisCompany)
                         {
                             var singlequery = from o in dc.PMCompanySites where o.siteName == sn select o;
@@ -259,11 +264,8 @@ namespace Password_Manager
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    
                 }
-                
             }
-            
         }
 
         private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
@@ -273,15 +275,15 @@ namespace Password_Manager
                 bPasswordHidden = false;
                 PassTextBox.Foreground = Brushes.Black;
                 ShowPasswordBtn.Content = "Hide";
+                
             }
             else 
             {
                 bPasswordHidden = true;
                 PassTextBox.Foreground = Brushes.White;
                 ShowPasswordBtn.Content = "Show";
-            }
-            
 
+            }
         }
 
         private void PracticeBox_DropDownClosed(object sender, EventArgs e)
@@ -289,6 +291,7 @@ namespace Password_Manager
             try
             {
                 var prac = Int32.Parse(practiceBox.Text);
+                if (prac == 0) { return; }
                 var sn = siteNameBox.Text;
                 if (!string.IsNullOrEmpty(sn) && (!string.IsNullOrEmpty(prac.ToString())))
                 {
@@ -315,7 +318,6 @@ namespace Password_Manager
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
 
         private void EditASiteMenuItem_Click(object sender, RoutedEventArgs e)

@@ -75,6 +75,10 @@ namespace Password_Manager
         {
             var sn = EditSiteNameBox.Text;
             IEnumerable<int> query = null;
+            EditSiteNotesBox.Clear();
+            EditSitePassBox.Clear();
+            EditSiteUrlBox.Clear();
+            EditSiteIdBox.Clear();
             try
             {
                 using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
@@ -95,6 +99,7 @@ namespace Password_Manager
                         {
                             EditSitePracticeBox.Items.Add(p);
                         }
+                        EditSitePracticeBox.Text = "Choose..";
                     }
                     else if (bModeIsCompany)
                     {
@@ -119,9 +124,7 @@ namespace Password_Manager
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                
             }
-            
         }
 
         private void EditSitePracticeBox_DropDownClosed(object sender, EventArgs e)
@@ -155,11 +158,6 @@ namespace Password_Manager
             {
                 MessageBox.Show(ex.Message);
             }
-            
-                
-
-            
-                
         }
 
         public void LoadUserSite(PMUserSite obj)

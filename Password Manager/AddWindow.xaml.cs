@@ -27,6 +27,7 @@ namespace Password_Manager
         {
             InitializeComponent();
             LoadPracticeBox();
+            InitComboBox();
         }
 
         private void Cancelbtn_Click(object sender, RoutedEventArgs e)
@@ -170,5 +171,70 @@ namespace Password_Manager
             tb.GotFocus -= AddNotesBox_GotFocus;
         }
         #endregion
+
+        private void CbAddSite_DropDownClosed(object sender, EventArgs e)
+        {
+            var sn = cbAddSite.Text;
+            IEnumerable<int> query = null;
+            AddSiteNameBox.Clear();
+            AddPasswordBox.Clear();
+            AddLoginIdBox.Clear();
+            AddNotesBox.Clear();
+            AddWebAddressBox.Clear();
+            
+            try
+            {
+                if (!string.IsNullOrEmpty(sn))
+                {
+                    using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                    {
+                        if (MainWindow.bModeisCompany)
+                        {
+                            query = from o in dc.PMCompanySites.AsEnumerable() where o.siteName == sn select o.practice;
+                        }
+                        else
+                        {
+                            query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
+                        }
+                        //set prac box to Choose..
+                        //fill site, name, notes boxes
+                        //add site
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void InitComboBox()
+        {
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                try
+                {
+                    if (!MainWindow.bModeisCompany)
+                    {
+                        var query = from s in dc.PMUserSites
+                                    where s.userName == MainWindow.sUsername
+                                    select s.siteName.AsEnumerable();
+                        var distinct = query.Distinct().ToList();
+                        cbAddSite.ItemsSource = distinct;
+                    }
+                    else if (MainWindow.bModeisCompany)
+                    {
+                        var query = from s in dc.PMCompanySites
+                                    select s.siteName.AsEnumerable();
+                        var distinct = query.Distinct().ToList();
+                        cbAddSite.ItemsSource = distinct;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
     }
 }

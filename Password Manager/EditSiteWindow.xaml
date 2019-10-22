@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
-        Title="Edit Site Window" Height="269.492" Width="300" Background="#FFCBD059" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Edit Site Window" Height="270" Width="300" Background="#FFCBD059" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <ComboBox x:Name="EditSiteNameBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="191" DropDownClosed="EditSiteNameBox_DropDownClosed"/>
         <ComboBox x:Name="EditSitePracticeBox" HorizontalAlignment="Left" Margin="227,10,0,0" VerticalAlignment="Top" Width="57" DropDownClosed="EditSitePracticeBox_DropDownClosed"/>
@@ -18,7 +18,7 @@
         <Label Content="ID:" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="25" Height="23" FontSize="8" FontWeight="Bold"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="128,37,0,0" VerticalAlignment="Top" Width="46" Height="23" FontSize="8" FontWeight="Bold" />
         <Label Content="URL:" HorizontalAlignment="Left" Margin="5,65,0,0" VerticalAlignment="Top" Width="30" Height="23" FontSize="8" FontWeight="Bold"/>
-        <Label Content="Notes:" HorizontalAlignment="Left" Margin="5,93,0,0" VerticalAlignment="Top" Width="62" Height="27" FontSize="9" FontWeight="Bold"/>
+        <Label Content="Notes:" HorizontalAlignment="Left" Margin="5,93,0,0" VerticalAlignment="Top" Width="41" Height="27" FontSize="9" FontWeight="Bold"/>
 
     </Grid>
 </Window>

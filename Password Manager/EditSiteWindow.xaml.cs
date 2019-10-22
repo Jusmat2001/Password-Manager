@@ -81,43 +81,46 @@ namespace Password_Manager
             EditSiteIdBox.Clear();
             try
             {
-                using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                if (!string.IsNullOrEmpty(sn))
                 {
-                    if (bModeIsCompany)
+                    using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
                     {
-                        query = from o in dc.PMCompanySites.AsEnumerable() where o.siteName == sn select o.practice;
-                    }
-                    else
-                    {
-                        query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
-                    }
-                    if (query.Count() > 1)
-                    {
-                        EditSitePracticeBox.IsEnabled = true;
-                        EditSitePracticeBox.Items.Clear();
-                        foreach (var p in query)
+                        if (bModeIsCompany)
                         {
-                            EditSitePracticeBox.Items.Add(p);
+                            query = from o in dc.PMCompanySites.AsEnumerable() where o.siteName == sn select o.practice;
                         }
-                        EditSitePracticeBox.Text = "Choose..";
-                    }
-                    else if (bModeIsCompany)
-                    {
-                        var singlequery = from o in dc.PMCompanySites where o.siteName == sn select o;
-                        PMCompanySite pmcobj = new PMCompanySite();
-                        pmcobj = singlequery.First();
-                        LoadCompanySite(pmcobj);
-                        EditSitePracticeBox.Text = "0";
-                        EditSitePracticeBox.IsEnabled = false;
-                    }
-                    else
-                    {
-                        var singlequery = from o in dc.PMUserSites where o.siteName == sn select o;
-                        PMUserSite pmuobj = new PMUserSite();
-                        pmuobj = singlequery.First();
-                        LoadUserSite(pmuobj);
-                        EditSitePracticeBox.Text = "0";
-                        EditSitePracticeBox.IsEnabled = false;
+                        else
+                        {
+                            query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
+                        }
+                        if (query.Count() > 1)
+                        {
+                            EditSitePracticeBox.IsEnabled = true;
+                            EditSitePracticeBox.Items.Clear();
+                            foreach (var p in query)
+                            {
+                                EditSitePracticeBox.Items.Add(p);
+                            }
+                            EditSitePracticeBox.Text = "Choose..";
+                        }
+                        else if (bModeIsCompany)
+                        {
+                            var singlequery = from o in dc.PMCompanySites where o.siteName == sn select o;
+                            PMCompanySite pmcobj = new PMCompanySite();
+                            pmcobj = singlequery.First();
+                            LoadCompanySite(pmcobj);
+                            EditSitePracticeBox.Text = "0";
+                            EditSitePracticeBox.IsEnabled = false;
+                        }
+                        else
+                        {
+                            var singlequery = from o in dc.PMUserSites where o.siteName == sn select o;
+                            PMUserSite pmuobj = new PMUserSite();
+                            pmuobj = singlequery.First();
+                            LoadUserSite(pmuobj);
+                            EditSitePracticeBox.Text = "0";
+                            EditSitePracticeBox.IsEnabled = false;
+                        }
                     }
                 }
             }
@@ -129,35 +132,40 @@ namespace Password_Manager
 
         private void EditSitePracticeBox_DropDownClosed(object sender, EventArgs e)
         {
-            try
+            var grab = EditSitePracticeBox.Text;
+            int prac;
+            if (Int32.TryParse(grab, out prac))
             {
-                var prac = Int32.Parse(EditSitePracticeBox.Text);
-                var sn = EditSiteNameBox.Text;
-                if (!string.IsNullOrEmpty(sn) && (!string.IsNullOrEmpty(prac.ToString())))
+                try
                 {
-                    using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+                    var sn = EditSiteNameBox.Text;
+                    if (!string.IsNullOrEmpty(sn))
                     {
-                        if (!bModeIsCompany)
+                        using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
                         {
-                            var query = from o in dc.PMUserSites where o.siteName == sn && o.practice == prac select o;
-                            PMUserSite pmuobj = new PMUserSite();
-                            pmuobj = query.First();
-                            LoadUserSite(pmuobj);
-                        }
-                        else if (bModeIsCompany)
-                        {
-                            var query = from o in dc.PMCompanySites where o.siteName == sn && o.practice == prac select o;
-                            PMCompanySite pmcobj = new PMCompanySite();
-                            pmcobj = query.First();
-                            LoadCompanySite(pmcobj);
+                            if (!bModeIsCompany)
+                            {
+                                var query = from o in dc.PMUserSites where o.siteName == sn && o.practice == prac select o;
+                                PMUserSite pmuobj = new PMUserSite();
+                                pmuobj = query.First();
+                                LoadUserSite(pmuobj);
+                            }
+                            else if (bModeIsCompany)
+                            {
+                                var query = from o in dc.PMCompanySites where o.siteName == sn && o.practice == prac select o;
+                                PMCompanySite pmcobj = new PMCompanySite();
+                                pmcobj = query.First();
+                                LoadCompanySite(pmcobj);
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                
         }
 
         public void LoadUserSite(PMUserSite obj)

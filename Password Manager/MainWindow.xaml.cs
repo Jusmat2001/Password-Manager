@@ -57,7 +57,7 @@ namespace Password_Manager
             if (!bModeisCompany)
             {
                 bModeisCompany= true;
-                modeSwitchBtn.Content = "CodeOne";
+                modeSwitchBtn.Content = "Shared";
                 modeSwitchBtn.Background = Brushes.DarkRed;
                 bWasCompanyMode = true;
                 InitComboBox();
@@ -70,7 +70,7 @@ namespace Password_Manager
             else if (bModeisCompany)
             {
                 bModeisCompany = false ;
-                modeSwitchBtn.Content = "User";
+                modeSwitchBtn.Content = "Individual";
                 modeSwitchBtn.Background = Brushes.SteelBlue;
                 InitComboBox();
                 EditMenu.IsEnabled = true;
@@ -211,6 +211,7 @@ namespace Password_Manager
             catch (Exception ex)
             {
                 MessageBox.Show("Hyperlink unavailable. Please make sure the web address was copied directly from the address bar of the working web page you would like to link. Please see Justin for further assistance.");
+                MessageBox.Show(ex.Message);
             }
             
             
@@ -228,7 +229,7 @@ namespace Password_Manager
             NoteBox.Text = "";
             using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
             {
-                if (!string.IsNullOrEmpty(sn))
+                if (!string.IsNullOrEmpty(sn) && (sn != "Choose a website..."))
                 {
                     try
                     {
@@ -288,9 +289,11 @@ namespace Password_Manager
 
         private void PracticeBox_DropDownClosed(object sender, EventArgs e)
         {
+            var prac = Int32.Parse(practiceBox.Text);
+            if (!string.IsNullOrEmpty(prac.ToString()))
             try
             {
-                var prac = Int32.Parse(practiceBox.Text);
+                
                 if (prac == 0) { return; }
                 var sn = siteNameBox.Text;
                 if (!string.IsNullOrEmpty(sn) && (!string.IsNullOrEmpty(prac.ToString())))
@@ -335,6 +338,8 @@ namespace Password_Manager
         {
             InitComboBox();
         }
+
+        
     }
     
 

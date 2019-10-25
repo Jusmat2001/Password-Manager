@@ -57,15 +57,12 @@ namespace Password_Manager
             if (!bModeisCompany)
             {
                 bModeisCompany= true;
-                modeSwitchBtn.Content = "Shared";
+                modeSwitchBtn.Content = "Shared Sites";
                 modeSwitchBtn.Background = Brushes.DarkRed;
                 bWasCompanyMode = true;
-                InitComboBox();
-                if (SQLAccess.IsSuperCheck(sUsername))
-                {
-                    EditMenu.IsEnabled = true;
-                }
-                else { EditMenu.IsEnabled = false; }
+                //InitComboBox();
+                RefreshPage();
+                
             }
             else if (bModeisCompany)
             {
@@ -79,12 +76,21 @@ namespace Password_Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            RefreshPage();
+        }
+
+        public void RefreshPage()
+        {
             cU.User = sUsername;
             userDecBlock.DataContext = cU;
             InitComboBox();
             practiceBox.IsEnabled = false;
             if (bPasswordHidden) { PassTextBox.Foreground = Brushes.White; }
-
+            if (SQLAccess.IsSuperCheck(sUsername))
+            {
+                EditMenu.IsEnabled = true;
+            }
+            else { EditMenu.IsEnabled = false; }
         }
 
         public void InitComboBox()
@@ -118,15 +124,15 @@ namespace Password_Manager
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (bWasCompanyMode)
-            {
-                string msg = "Please remember to update any company wide login info that may have changed. Exit program?";
+            //if (bWasCompanyMode)
+            //{
+                string msg = "Please remember to update any shared site login info that may have changed. Exit program?";
                 MessageBoxResult result = MessageBox.Show(msg, "Update Reminder", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     e.Cancel = true;
                 }
-            }
+            //}
         }
         #region Copy buttons
         private void IdCopyBtn_Click(object sender, RoutedEventArgs e)

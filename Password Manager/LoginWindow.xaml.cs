@@ -97,8 +97,7 @@ namespace Password_Manager
             }
             else
             {
-                MessageBox.Show(
-                    "Login info does not match. Please try again or email Justin in IT if the problem persists. ");
+                MessageBox.Show("Login info does not match. Please try again or email Justin in IT if the problem persists. ");
             }
         }
 

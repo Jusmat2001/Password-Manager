@@ -18,7 +18,7 @@
                 </MenuItem>
                 <MenuItem Header="_Edit" x:Name="EditMenu" >
                     <MenuItem x:Name="AddASiteMenuItem" Header="_Add a new website\practice" Click="AddASiteMenuItem_Click" />
-                    
+
                     <MenuItem x:Name="EditASiteMenuItem" Header="_Edit website info" Click="EditASiteMenuItem_Click"/>
                     <MenuItem x:Name="DeleteASiteMenuItem" Header="_Delete a website" Click="DeleteASiteMenuItem_Click"/>
                 </MenuItem>
@@ -27,21 +27,21 @@
         </DockPanel>
 
 
-        <Button x:Name="IdCopyBtn" Content="Copy" Height="23" VerticalAlignment="Top" Margin="124,113,337,0" ToolTip="Copies Site Id to Clipboard. Ctrl+V to paste." Click="IdCopyBtn_Click"/>
-        <Button x:Name="PassCopyBtn" Content="Copy" Height="23" VerticalAlignment="Top" ToolTip="Copies Site Password to Clipboard. Ctrl+V to paste." Margin="331,113,129,0" Click="PassCopyBtn_Click"/>
-        <Button x:Name="modeSwitchBtn" Content="Shared" HorizontalAlignment="Left" Height="37" Margin="380,26,0,0" VerticalAlignment="Top" Width="104" Click="modeSwitchBtn_Click" FontSize="16" FontWeight="Bold" ToolTip="Switches between company and user site lists."/>
-        <TextBlock x:Name="userDecBlock" HorizontalAlignment="Left" Height="23" Margin="407,113,0,0" TextWrapping="Wrap" Text="{Binding User}" VerticalAlignment="Top" Width="77" FontWeight="Bold" TextDecorations="Underline" FontSize="10" Foreground="#FFA51616" RenderTransformOrigin="0.483,1.217" FontFamily="Euphemia"/>
-        <TextBlock HorizontalAlignment="Left" Height="11" Margin="407,97,0,0" TextWrapping="Wrap" Text="Current User:" VerticalAlignment="Top" Width="67" FontSize="10" TextDecorations="Underline" FontWeight="Bold"/>
+        <Button x:Name="IdCopyBtn" Content="Copy" Width="50" Height="23" VerticalAlignment="Top" Margin="151,113,286.6,0" ToolTip="Copies Site Id to Clipboard. Ctrl+V to paste." Click="IdCopyBtn_Click"/>
+        <Button x:Name="PassCopyBtn" Content="Copy" Height="23" Width="50" VerticalAlignment="Top" ToolTip="Copies Site Password to Clipboard. Ctrl+V to paste." Margin="424,113,13.6,0" Click="PassCopyBtn_Click"/>
+        <Button x:Name="modeSwitchBtn" Content="Shared sites" HorizontalAlignment="Left" Height="27" Margin="363,26,0,0" VerticalAlignment="Top" Width="121" Click="modeSwitchBtn_Click" FontSize="14" FontWeight="Bold" ToolTip="Switches between company and user site lists."/>
+        <TextBlock x:Name="userDecBlock" HorizontalAlignment="Left" Height="17" Margin="407,246,0,0" TextWrapping="Wrap" Text="{Binding User}" VerticalAlignment="Top" Width="77" FontWeight="Bold" TextDecorations="Underline" FontSize="10" Foreground="#FFA51616" RenderTransformOrigin="0.483,1.217" FontFamily="Euphemia"/>
+        <TextBlock HorizontalAlignment="Left" Height="11" Margin="321,246,0,0" TextWrapping="Wrap" Text="Current User:" VerticalAlignment="Top" Width="67" FontSize="10" TextDecorations="Underline" FontWeight="Bold"/>
         <ComboBox x:Name="siteNameBox" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="178" Text="Choose a website..." IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"  DropDownClosed="SiteNameBox_DropDownClosed" />
         <ComboBox x:Name="practiceBox" HorizontalAlignment="Left" Margin="277,26,0,0" VerticalAlignment="Top" Width="66" Text="Practice" IsEditable="True" IsEnabled="True" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" DropDownClosed="PracticeBox_DropDownClosed" ToolTip="0 means no specific practice"/>
-        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Height="23" Margin="10,113,0,0" TextWrapping="Wrap" Text="Login Id" VerticalAlignment="Top" Width="109"/>
+        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Height="23" Margin="37,113,0,0" TextWrapping="Wrap" Text="Login Id" VerticalAlignment="Top" Width="109"/>
 
-        <TextBox x:Name="PassTextBox" HorizontalAlignment="Left" Height="23" Margin="183,113,0,0" TextWrapping="Wrap" Text="Site Password" VerticalAlignment="Top" Width="110"/>
-        <TextBlock x:Name="NoteBox" HorizontalAlignment="Left" Height="116" Margin="10,141,0,0" TextWrapping="Wrap" Text="Remember to update Password Manager if you change any login info online." VerticalAlignment="Top" Width="474" Foreground="#FFC01B1B" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Padding="2"/>
-        <Button x:Name="ShowPasswordBtn" Content="Show" HorizontalAlignment="Left" Margin="298,113,0,0" VerticalAlignment="Top" Width="28" Height="23" Click="ShowPasswordBtn_Click" FontSize="9" ToolTip="Show/Hide Password"/>
+        <TextBox x:Name="PassTextBox" HorizontalAlignment="Left" Height="23" Margin="309,113,0,0" TextWrapping="Wrap" Text="Site Password" VerticalAlignment="Top" Width="110"/>
+        <TextBlock x:Name="NoteBox" HorizontalAlignment="Left" Height="105" Margin="10,141,0,0" TextWrapping="Wrap" Text="Remember to update Password Manager if you change any login info online." VerticalAlignment="Top" Width="474" Foreground="#FFC01B1B" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Padding="2"/>
+        <Button x:Name="ShowPasswordBtn" Content="Show" HorizontalAlignment="Left" Margin="281,113,0,0" VerticalAlignment="Top" Width="28" Height="23" Click="ShowPasswordBtn_Click" FontSize="9" ToolTip="Show/Hide Password"/>
 
 
-        <RichTextBox x:Name="UrlBox" HorizontalAlignment="Left" Margin="10,53,0,0"  VerticalAlignment="Top" Width="355" Height="55" IsReadOnly="True" IsDocumentEnabled="True">
+        <RichTextBox x:Name="UrlBox" HorizontalAlignment="Left" Margin="10,53,0,0"  VerticalAlignment="Top" Width="474" Height="55" IsReadOnly="True" IsDocumentEnabled="True">
             <FlowDocument>
                 <Paragraph>
 
@@ -49,6 +49,8 @@
             </FlowDocument>
         </RichTextBox>
         <Button x:Name="RefreshListBtn" Content="Refresh" HorizontalAlignment="Left" Margin="193,26,0,0" VerticalAlignment="Top" Width="39" Height="22" FontSize="9" Click="RefreshListBtn_Click"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="27" FontSize="10"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="225,113,0,0" VerticalAlignment="Top" Width="56" FontSize="10"/>
 
     </Grid>
 </Window>

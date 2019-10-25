@@ -7,24 +7,23 @@
         mc:Ignorable="d"
         Title="Add Website" Height="325.634" Width="400" Background="#FF97D371" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBox x:Name="AddSiteNameBox" HorizontalAlignment="Left" Height="23" Margin="21,10,0,0" TextWrapping="Wrap" Text="New Site Name" VerticalAlignment="Top" Width="181" TabIndex="0" GotFocus="AddSiteNameBox_GotFocus"/>
-        <TextBox x:Name="AddWebAddressBox" HorizontalAlignment="Left" Height="23" Margin="21,38,0,0" TextWrapping="Wrap" Text="Web Address" VerticalAlignment="Top" Width="354" TabIndex="2"  GotFocus="AddWebAddressBox_GotFocus"/>
-        <TextBox x:Name="AddLoginIdBox" HorizontalAlignment="Left" Height="23" Margin="21,66,0,0" TextWrapping="Wrap" Text="Login Id" VerticalAlignment="Top" Width="109" TabIndex="3" GotFocus="AddUsernameBox_GotFocus"/>
-        <TextBox x:Name="AddPasswordBox" HorizontalAlignment="Left" Height="23" Margin="21,94,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="109" TabIndex="4" GotFocus="AddPasswordBox_GotFocus"/>
-        <TextBox x:Name="AddNotesBox" HorizontalAlignment="Left" Height="91" Margin="21,122,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Width="354" TabIndex="5" GotFocus="AddNotesBox_GotFocus"/>
-        <TextBlock HorizontalAlignment="Left" Margin="21,270,0,0" TextWrapping="Wrap" Text="* = required field" VerticalAlignment="Top" Width="166" FontWeight="Bold" FontStyle="Italic"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,13,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="214,10,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,41,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,69,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="301,10,0,0" TextWrapping="Wrap" Text="Use 0 if no practice" VerticalAlignment="Top" Width="83" FontSize="9" FontWeight="SemiBold" TextAlignment="Center"/>
-        <Button x:Name="AddBtn" Content="Add" HorizontalAlignment="Left" Margin="219,264,0,0" VerticalAlignment="Top" Width="75" Click="AddBtn_Click" TabIndex="6"/>
-        <Button x:Name="Cancelbtn" Content="Cancel" HorizontalAlignment="Left" Margin="309,264,0,0" VerticalAlignment="Top" Width="75" Click="Cancelbtn_Click" TabIndex="7" />
-        <ComboBox x:Name="AddPracticeBox" HorizontalAlignment="Left" Height="23" Margin="223,10,0,0" VerticalAlignment="Top" Width="71" IsEnabled="True" IsEditable="True"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="156,61,0,0" TextWrapping="Wrap" Text="Copy and paste Web Address from the address bar of your internet browser" VerticalAlignment="Top" Width="219" FontSize="9" FontWeight="Bold" TextDecorations="Underline"/>
-        <ComboBox x:Name="cbAddSite" HorizontalAlignment="Left" Margin="21,237,0,0" VerticalAlignment="Top" Width="181"  DropDownClosed="CbAddSite_DropDownClosed"/>
-        <Label Content="To add a practice to a saved website, choose a website from the drop down" HorizontalAlignment="Left" Margin="12,213,0,0" VerticalAlignment="Top" FontSize="10" FontWeight="Bold" Width="372"/>
-        <Separator HorizontalAlignment="Left" Height="10" Margin="0,213,-0.4,0" VerticalAlignment="Top" Width="394" Background="#FFFA1616"/>
+        <TextBox x:Name="AddSiteNameBox" HorizontalAlignment="Left" Height="23" Margin="21,19,0,0" TextWrapping="Wrap" Text="New Site Name" VerticalAlignment="Top" Width="181" TabIndex="0" GotFocus="AddSiteNameBox_GotFocus"/>
+        <TextBox x:Name="AddWebAddressBox" HorizontalAlignment="Left" Height="23" Margin="21,75,0,0" TextWrapping="Wrap" Text="Web Address" VerticalAlignment="Top" Width="354" TabIndex="2"  GotFocus="AddWebAddressBox_GotFocus"/>
+        <TextBox x:Name="AddLoginIdBox" HorizontalAlignment="Left" Height="23" Margin="21,103,0,0" TextWrapping="Wrap" Text="Login Id" VerticalAlignment="Top" Width="109" TabIndex="3" GotFocus="AddUsernameBox_GotFocus"/>
+        <TextBox x:Name="AddPasswordBox" HorizontalAlignment="Left" Height="23" Margin="21,131,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="109" TabIndex="4" GotFocus="AddPasswordBox_GotFocus"/>
+        <TextBox x:Name="AddNotesBox" HorizontalAlignment="Left" Height="91" Margin="21,159,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Width="354" TabIndex="5" GotFocus="AddNotesBox_GotFocus"/>
+        <TextBlock HorizontalAlignment="Left" Margin="12,255,0,0" TextWrapping="Wrap" Text="* = required field" VerticalAlignment="Top" Width="166" FontWeight="Bold" FontStyle="Italic" FontSize="10"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,19,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,47,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,75,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,103,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="95,52,0,0" TextWrapping="Wrap" Text="Use 0 if no practice" VerticalAlignment="Top" Width="83" FontSize="9" FontWeight="Bold" TextAlignment="Center" TextDecorations="Underline"/>
+        <Button x:Name="AddBtn" Content="Add" HorizontalAlignment="Left" Margin="207,266,0,0" VerticalAlignment="Top" Width="75" Click="AddBtn_Click" TabIndex="6"/>
+        <Button x:Name="Cancelbtn" Content="Cancel" HorizontalAlignment="Left" Margin="300,266,0,0" VerticalAlignment="Top" Width="75" Click="Cancelbtn_Click" TabIndex="7" />
+        <ComboBox x:Name="AddPracticeBox" HorizontalAlignment="Left" Height="23" Margin="21,47,0,0" VerticalAlignment="Top" Width="71" IsEnabled="True" IsEditable="True"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="156,103,0,0" TextWrapping="Wrap" Text="Copy and paste Web Address from the address bar of your internet browser" VerticalAlignment="Top" Width="219" FontSize="9" FontWeight="Bold" TextDecorations="Underline"/>
+        <ComboBox x:Name="cbAddSite" HorizontalAlignment="Left" Margin="207,20,0,0" VerticalAlignment="Top" Width="181"  DropDownClosed="CbAddSite_DropDownClosed"/>
+        <Label Content="Saved sites:" HorizontalAlignment="Left" Margin="207,3,-185.4,0" VerticalAlignment="Top" FontSize="10" FontWeight="Bold" Width="372"/>
 
     </Grid>
 </Window>

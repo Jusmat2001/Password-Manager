@@ -240,9 +240,6 @@ namespace Password_Manager
                         {
                             MessageBox.Show("Update Failed: \n\n"+ex.Message);
                         }
-                            
-                            
-                            
                     }
                     else if (MainWindow.bModeisCompany)
                     {

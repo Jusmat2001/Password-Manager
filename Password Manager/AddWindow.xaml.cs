@@ -28,6 +28,7 @@ namespace Password_Manager
             InitializeComponent();
             LoadPracticeBox();
             InitComboBox();
+            cbAddSite.Text = "Saved Sites List";
         }
 
         private void Cancelbtn_Click(object sender, RoutedEventArgs e)
@@ -60,10 +61,18 @@ namespace Password_Manager
                     pmu.sitePass = AddPasswordBox.Text;
                     pmu.userName = MainWindow.sUsername;
                     pmu.notes = AddNotesBox.Text;
-                    dc.PMUserSites.InsertOnSubmit(pmu);
-                    dc.SubmitChanges();
+                    if(!DupSiteCheck(pmu.siteName, pmu.practice))
+                    {
+                        dc.PMUserSites.InsertOnSubmit(pmu);
+                        dc.SubmitChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                return true;
+                //return true;
             }
             catch (Exception e)
             {
@@ -87,10 +96,17 @@ namespace Password_Manager
                     pmc.lastChanged = DateTime.Now;
                     pmc.notes = AddNotesBox.Text;
                     pmc.lastChangedBy = MainWindow.sUsername;
-                    dc.PMCompanySites.InsertOnSubmit(pmc);
-                    dc.SubmitChanges();
+                    if (!DupSiteCheck(pmc.siteName, pmc.practice))
+                    {
+                        dc.PMCompanySites.InsertOnSubmit(pmc);
+                        dc.SubmitChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                return true;
             }
             catch (Exception e)
             {
@@ -113,7 +129,7 @@ namespace Password_Manager
             {
                 if (AddCompanySite())
                 {
-                    MessageBox.Show("Company site added");
+                    MessageBox.Show("Shared site added");
                 }
                 else { MessageBox.Show("Site not added"); }
             }
@@ -121,7 +137,7 @@ namespace Password_Manager
             {
                 if (AddUserSite())
                 {
-                    MessageBox.Show("User site added");
+                    MessageBox.Show("Individual site added");
                 }
                 else { MessageBox.Show("Site not added"); }
             }
@@ -175,10 +191,11 @@ namespace Password_Manager
         private void CbAddSite_DropDownClosed(object sender, EventArgs e)
         {
             var sn = cbAddSite.Text;
-            IEnumerable<int> query = null;
+            //IEnumerable<int> query = null;
             AddSiteNameBox.Clear();
-            AddPasswordBox.Clear();
-            AddLoginIdBox.Clear();
+            AddPasswordBox.Text = "Password";
+            AddPracticeBox.Text = "0";
+            AddLoginIdBox.Text = "Login ID";
             AddNotesBox.Clear();
             AddWebAddressBox.Clear();
             
@@ -188,17 +205,27 @@ namespace Password_Manager
                 {
                     using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
                     {
+                        
                         if (MainWindow.bModeisCompany)
                         {
-                            query = from o in dc.PMCompanySites.AsEnumerable() where o.siteName == sn select o.practice;
+                            var singlequery = from o in dc.PMCompanySites where o.siteName == sn select o;
+                            PMCompanySite pmcobj = new PMCompanySite();
+                            pmcobj = singlequery.First();
+                            AddNotesBox.Text = pmcobj.notes;
+                            AddSiteNameBox.Text = pmcobj.siteName;
+                            AddWebAddressBox.Text = pmcobj.siteUrl;
                         }
                         else
                         {
-                            query = from o in dc.PMUserSites.AsEnumerable() where o.siteName == sn select o.practice;
+                            var singlequery = from o in dc.PMUserSites where o.siteName == sn select o;
+                            PMUserSite pmuobj = new PMUserSite();
+                            pmuobj = singlequery.First();
+                            AddNotesBox.Text = pmuobj.notes;
+                            AddSiteNameBox.Text = pmuobj.siteName;
+                            AddWebAddressBox.Text = pmuobj.siteUrl;
                         }
-                        //set prac box to Choose..
-                        //fill site, name, notes boxes
-                        //add site
+                        
+                        
                     }
                 }
             }
@@ -234,6 +261,42 @@ namespace Password_Manager
                 {
                     MessageBox.Show(e.Message);
                 }
+            }
+        }
+
+        public bool DupSiteCheck(string siteName, int practice)
+        {
+            
+            using (L2SAccessDataContext dc = new L2SAccessDataContext(SQLAccess.ConnVal("C1user")))
+            {
+                if (MainWindow.bModeisCompany)
+                {
+                    var dupCheckQuery = from o in dc.PMCompanySites where o.siteName == siteName && o.practice == practice select o;
+                    if (dupCheckQuery.Any())
+                    {
+                        MessageBox.Show("Site name and practice already exist.");
+                        return true;
+                        
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    var dupCheckQuery = from o in dc.PMUserSites where o.siteName == siteName && o.practice == practice select o;
+                    if (dupCheckQuery.Any())
+                    {
+                        MessageBox.Show("Site name and practice already exist.");
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
             }
         }
     }

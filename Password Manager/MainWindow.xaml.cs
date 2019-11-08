@@ -208,7 +208,9 @@ namespace Password_Manager
                 link.IsEnabled = true;
                 link.Inlines.Add(site);
                 link.NavigateUri = new Uri(site);
-                link.RequestNavigate += (sender, args) => Process.Start(args.Uri.ToString());
+
+                //link.RequestNavigate += (sender, args) => Process.Start(args.Uri.ToString());
+                link.RequestNavigate += new RequestNavigateEventHandler(RequestNavigateHandler);
 
                 para.Inlines.Add(link);
                 fd.Blocks.Add(para);
@@ -222,8 +224,22 @@ namespace Password_Manager
             
             
         }
+        private void RequestNavigateHandler(object sender, RequestNavigateEventArgs e)
+        {
+            if (e.Uri.ToString().Contains("aarpprovideronlinetool"))
+            {
+                Process.Start("IExplore.exe", e.Uri.ToString());
+                
+            }
+            else
+            {
+                Process.Start(e.Uri.ToString());
+            }
 
-        
+            
+        }
+
+
 
         private void SiteNameBox_DropDownClosed(object sender, EventArgs e)
         {
@@ -299,8 +315,11 @@ namespace Password_Manager
             if (!string.IsNullOrEmpty(prac.ToString()))
             try
             {
-                
-                if (prac == 0) { return; }
+
+                    //if (prac == 0) { return; }
+                    //the line above disables access to sites with a 0 prac which is needed as a multi prac option. 
+                    //watch for related bugs from removal of line, that the line was put in for.
+
                 var sn = siteNameBox.Text;
                 if (!string.IsNullOrEmpty(sn) && (!string.IsNullOrEmpty(prac.ToString())))
                 {

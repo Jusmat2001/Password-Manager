@@ -9,15 +9,15 @@
     <Grid>
         <TextBox x:Name="AddSiteNameBox" HorizontalAlignment="Left" Height="23" Margin="21,19,0,0" TextWrapping="Wrap" Text="New Site Name" VerticalAlignment="Top" Width="181" TabIndex="0" GotFocus="AddSiteNameBox_GotFocus"/>
         <TextBox x:Name="AddWebAddressBox" HorizontalAlignment="Left" Height="23" Margin="21,75,0,0" TextWrapping="Wrap" Text="Web Address" VerticalAlignment="Top" Width="354" TabIndex="2"  GotFocus="AddWebAddressBox_GotFocus"/>
-        <TextBox x:Name="AddLoginIdBox" HorizontalAlignment="Left" Height="23" Margin="21,103,0,0" TextWrapping="Wrap" Text="Login Id" VerticalAlignment="Top" Width="109" TabIndex="3" GotFocus="AddUsernameBox_GotFocus"/>
-        <TextBox x:Name="AddPasswordBox" HorizontalAlignment="Left" Height="23" Margin="21,131,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="109" TabIndex="4" GotFocus="AddPasswordBox_GotFocus"/>
+        <TextBox x:Name="AddLoginIdBox" HorizontalAlignment="Left" Height="23" Margin="21,103,0,0" TextWrapping="Wrap" Text="Login Id" VerticalAlignment="Top" Width="130" TabIndex="3" GotFocus="AddUsernameBox_GotFocus"/>
+        <TextBox x:Name="AddPasswordBox" HorizontalAlignment="Left" Height="23" Margin="21,131,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="181" TabIndex="4" GotFocus="AddPasswordBox_GotFocus"/>
         <TextBox x:Name="AddNotesBox" HorizontalAlignment="Left" Height="91" Margin="21,159,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Width="354" TabIndex="5" GotFocus="AddNotesBox_GotFocus"/>
         <TextBlock HorizontalAlignment="Left" Margin="12,255,0,0" TextWrapping="Wrap" Text="* = required field" VerticalAlignment="Top" Width="166" FontWeight="Bold" FontStyle="Italic" FontSize="10"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,19,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,47,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,75,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="12,103,0,0" TextWrapping="Wrap" Text="*" VerticalAlignment="Top" Width="9" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="95,52,0,0" TextWrapping="Wrap" Text="Use 0 if no practice" VerticalAlignment="Top" Width="83" FontSize="9" FontWeight="Bold" TextAlignment="Center" TextDecorations="Underline"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="95,52,0,0" TextWrapping="Wrap" Text="Use 0 if no specific practice" VerticalAlignment="Top" Width="117" FontSize="9" FontWeight="Bold" TextAlignment="Center" TextDecorations="Underline"/>
         <Button x:Name="AddBtn" Content="Add" HorizontalAlignment="Left" Margin="207,266,0,0" VerticalAlignment="Top" Width="75" Click="AddBtn_Click" TabIndex="6"/>
         <Button x:Name="Cancelbtn" Content="Cancel" HorizontalAlignment="Left" Margin="300,266,0,0" VerticalAlignment="Top" Width="75" Click="Cancelbtn_Click" TabIndex="7" />
         <ComboBox x:Name="AddPracticeBox" HorizontalAlignment="Left" Height="23" Margin="21,47,0,0" VerticalAlignment="Top" Width="71" IsEnabled="True" IsEditable="True"/>

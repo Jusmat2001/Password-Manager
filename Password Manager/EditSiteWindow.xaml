@@ -9,14 +9,14 @@
     <Grid>
         <ComboBox x:Name="EditSiteNameBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="191" DropDownClosed="EditSiteNameBox_DropDownClosed"/>
         <ComboBox x:Name="EditSitePracticeBox" HorizontalAlignment="Left" Margin="227,10,0,0" VerticalAlignment="Top" Width="57" DropDownClosed="EditSitePracticeBox_DropDownClosed"/>
-        <TextBox x:Name="EditSiteIdBox" HorizontalAlignment="Left" Height="23" Margin="35,37,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="93"/>
-        <TextBox x:Name="EditSitePassBox" HorizontalAlignment="Left" Height="23" Margin="174,37,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110"/>
+        <TextBox x:Name="EditSiteIdBox" HorizontalAlignment="Left" Height="23" Margin="20,37,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="93"/>
+        <TextBox x:Name="EditSitePassBox" HorizontalAlignment="Left" Height="23" Margin="159,37,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="125"/>
         <TextBox x:Name="EditSiteUrlBox" HorizontalAlignment="Left" Height="23" Margin="35,65,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="249"/>
         <TextBox x:Name="EditSiteNotesBox" HorizontalAlignment="Left" Height="95" Margin="9,111,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="274"/>
         <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" Width="75" Click="SaveBtn_Click"/>
         <Button x:Name="CancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="209,211,0,0" VerticalAlignment="Top" Width="75" Click="CancelBtn_Click"/>
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="25" Height="23" FontSize="8" FontWeight="Bold"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="128,37,0,0" VerticalAlignment="Top" Width="46" Height="23" FontSize="8" FontWeight="Bold" />
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="0,37,0,0" VerticalAlignment="Top" Width="20" Height="23" FontSize="8" FontWeight="Bold"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="113,37,0,0" VerticalAlignment="Top" Width="46" Height="23" FontSize="8" FontWeight="Bold" />
         <Label Content="URL:" HorizontalAlignment="Left" Margin="5,65,0,0" VerticalAlignment="Top" Width="30" Height="23" FontSize="8" FontWeight="Bold"/>
         <Label Content="Notes:" HorizontalAlignment="Left" Margin="5,93,0,0" VerticalAlignment="Top" Width="41" Height="27" FontSize="9" FontWeight="Bold"/>
 
